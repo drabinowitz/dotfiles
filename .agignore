@@ -1,0 +1,9 @@
+node_modules*
+static/js/bootstrap.min.js
+.bower_components/*
+*.swp
+*.class
+.DS_store
+.min-wd
+build/*
+!gulp/build/*
