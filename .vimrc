@@ -34,6 +34,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'sevko/vim-nand2tetris-syntax'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ternjs/tern_for_vim'
+Plugin 'ruanyl/vim-fixmyjs'
 
 " Git plugin not hosted on GitHub
 " Plugin 'git://git.wincent.com/command-t.git'
@@ -110,6 +111,9 @@ let g:syntastic_quiet_messages={'level':'warnings'}
 " let g:syntastic_shell = '/usr/local/bin/fish'
 
 let g:syntastic_javascript_checkers = ['eslint']
+
+let g:fixmyjs_rc_path = getcwd() + '/.eslintrc'
+autocmd BufWritePre *.js :Fixmyjs
 
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
 let g:ctrlp_user_command = 'ag %s -l -U --nocolor -g ""'
