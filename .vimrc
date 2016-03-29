@@ -113,7 +113,6 @@ let g:syntastic_quiet_messages={'level':'warnings'}
 let g:syntastic_javascript_checkers = ['eslint']
 
 let g:fixmyjs_rc_path = getcwd() + '/.eslintrc'
-autocmd BufWritePre *.js :Fixmyjs
 
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
 let g:ctrlp_user_command = 'ag %s -l -U --nocolor -g ""'
@@ -146,6 +145,8 @@ set list
 set listchars=tab:\ \_
 
 set shell=bash
+
+nnoremap <leader>f <Char-58>Fixmyjs<CR>
 
 nnoremap <leader>s <Char-23><Char-19>
 nnoremap <leader>v <Char-23><Char-22>
