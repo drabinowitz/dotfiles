@@ -15,9 +15,17 @@ layout social AFTER focus 'Slack'
 layout social AFTER focus 'Google Chrome'
 bind u:ctrl layout social
 
-layoue iterm 'iTerm' throw 1 resize
+layout iterm 'iTerm' corner top-left resize:screenSizeX;screenSizeY
 layout iterm AFTER focus 'iTerm'
 bind i:ctrl layout iterm
+
+layout google_chrome 'Google Chrome' corner top-left resize:screenSizeX;screenSizeY
+layout google_chrome AFTER focus 'Google Chrome'
+bind o:ctrl layout google_chrome
+
+layout firefox 'Firefox' corner top-left resize:screenSizeX;screenSizeY
+layout firefox AFTER focus 'Firefox'
+bind p:ctrl layout firefox
 
 # Resize Bindings
 bind right:alt       resize +10% +0
