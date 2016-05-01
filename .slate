@@ -5,6 +5,20 @@ config defaultToCurrentScreen true
 config nudgePercentOf screenSize
 config resizePercentOf screenSize
 
+# Relaunch binding
+bind r:cmd;ctrl relaunch
+
+# Layout bindings
+layout social 'Google Chrome' push left bar-resize:2*screenSizeX/3
+layout social 'Slack' push right bar-resize:screenSizeX/2
+layout social AFTER focus 'Slack'
+layout social AFTER focus 'Google Chrome'
+bind u:ctrl layout social
+
+layoue iterm 'iTerm' throw 1 resize
+layout iterm AFTER focus 'iTerm'
+bind i:ctrl layout iterm
+
 # Resize Bindings
 bind right:alt       resize +10% +0
 bind left:alt        resize -10% +0
@@ -16,10 +30,10 @@ bind up:ctrl;alt     resize +0   +10% bottom-right
 bind down:ctrl;alt   resize +0   -10% bottom-right
 
 # Push Bindings
-bind right:ctrl;cmd  push right bar-resize:screenSizeX/2
-bind left:ctrl;cmd   push left  bar-resize:screenSizeX/2
-bind up:ctrl;cmd     push up    bar-resize:screenSizeY/2
-bind down:ctrl;cmd   push down  bar-resize:screenSizeY/2
+bind l:cmd;ctrl push right bar-resize:screenSizeX/2
+bind h:cmd;ctrl push left  bar-resize:screenSizeX/2
+bind k:cmd;ctrl push up    bar-resize:screenSizeY/2
+bind j:cmd;ctrl push down  bar-resize:screenSizeY/2
 
 # Nudge Bindings
 bind right:shift;alt nudge +10% +0
@@ -37,12 +51,12 @@ bind up:ctrl;alt;cmd    throw up    resize
 bind down:ctrl;alt;cmd  throw down  resize
 
 # Focus Bindings
-bind right:cmd    focus right
-bind left:cmd     focus left
-bind up:cmd       focus up
-bind down:cmd     focus down
-bind up:cmd;alt   focus behind
-bind down:cmd;alt focus behind
+bind l:cmd        focus right
+bind h:cmd        focus left
+bind k:cmd        focus up
+bind j:cmd        focus down
+bind k:cmd;shift  focus behind
+bind j:cmd;shift  focus behind
 
 # Window Hints
 bind esc:cmd hint
