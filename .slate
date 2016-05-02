@@ -13,19 +13,15 @@ layout social 'Google Chrome' push left bar-resize:2*screenSizeX/3
 layout social 'Slack' push right bar-resize:screenSizeX/2
 layout social AFTER focus 'Slack'
 layout social AFTER focus 'Google Chrome'
-bind u:ctrl layout social
+bind i:ctrl layout social
 
 layout iterm 'iTerm' corner top-left resize:screenSizeX;screenSizeY
 layout iterm AFTER focus 'iTerm'
-bind i:ctrl layout iterm
+bind p:ctrl layout iterm
 
 layout google_chrome 'Google Chrome' corner top-left resize:screenSizeX;screenSizeY
 layout google_chrome AFTER focus 'Google Chrome'
-bind o:ctrl layout google_chrome
-
-layout firefox 'Firefox' corner top-left resize:screenSizeX;screenSizeY
-layout firefox AFTER focus 'Firefox'
-bind p:ctrl layout firefox
+bind n:ctrl layout google_chrome
 
 # Resize Bindings
 bind right:alt       resize +10% +0
