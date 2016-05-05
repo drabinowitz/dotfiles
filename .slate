@@ -9,19 +9,25 @@ config resizePercentOf screenSize
 bind r:cmd;ctrl relaunch
 
 # Layout bindings
-layout social 'Google Chrome' push left bar-resize:2*screenSizeX/3
-layout social 'Slack' push right bar-resize:screenSizeX/2
-layout social AFTER focus 'Slack'
-layout social AFTER focus 'Google Chrome'
-bind i:ctrl layout social
-
-layout iterm 'iTerm' corner top-left resize:screenSizeX;screenSizeY
+throw iterm 'iTerm' 1 resize
 layout iterm AFTER focus 'iTerm'
-bind p:ctrl layout iterm
+bind n:ctrl layout iterm
 
-layout google_chrome 'Google Chrome' corner top-left resize:screenSizeX;screenSizeY
+throw google_chrome 'Google Chrome' 0 resize
 layout google_chrome AFTER focus 'Google Chrome'
-bind n:ctrl layout google_chrome
+bind i:ctrl layout google_chrome
+
+throw google_chrome 'Google Chrome' 1 resize
+layout google_chrome AFTER focus 'Google Chrome'
+bind i:cmd;ctrl layout google_chrome
+
+throw firefox 'Firefox' 1 resize
+layout firefox AFTER focus 'Firefox'
+bind o:cmd;ctrl layout firefox
+
+throw safari 'Safari' 1 resize
+layout safari AFTER focus 'Safari'
+bind p:cmd;ctrl layout safari
 
 # Resize Bindings
 bind right:alt       resize +10% +0
@@ -34,10 +40,10 @@ bind up:ctrl;alt     resize +0   +10% bottom-right
 bind down:ctrl;alt   resize +0   -10% bottom-right
 
 # Push Bindings
-bind l:cmd;ctrl push right bar-resize:screenSizeX/2
-bind h:cmd;ctrl push left  bar-resize:screenSizeX/2
-bind k:cmd;ctrl push up    bar-resize:screenSizeY/2
-bind j:cmd;ctrl push down  bar-resize:screenSizeY/2
+bind l:ctrl;alt push right bar-resize:screenSizeX/2
+bind h:ctrl;alt push left  bar-resize:screenSizeX/2
+bind k:ctrl;alt push up    bar-resize:screenSizeY/2
+bind j:ctrl;alt push down  bar-resize:screenSizeY/2
 
 # Nudge Bindings
 bind right:shift;alt nudge +10% +0
@@ -55,12 +61,12 @@ bind up:ctrl;alt;cmd    throw up    resize
 bind down:ctrl;alt;cmd  throw down  resize
 
 # Focus Bindings
-bind l:cmd        focus right
-bind h:cmd        focus left
-bind k:cmd        focus up
-bind j:cmd        focus down
-bind k:cmd;shift  focus behind
-bind j:cmd;shift  focus behind
+bind l:cmd;ctrl        focus right
+bind h:cmd;ctrl        focus left
+bind k:cmd;ctrl        focus up
+bind j:cmd;ctrl        focus down
+bind k:cmd;ctrl;shift  focus behind
+bind j:cmd;ctrl;shift  focus behind
 
 # Window Hints
 bind esc:cmd hint
