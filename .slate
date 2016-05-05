@@ -9,23 +9,23 @@ config resizePercentOf screenSize
 bind r:cmd;ctrl relaunch
 
 # Layout bindings
-throw iterm 'iTerm' 1 resize
+layout iterm 'iTerm' throw 1 resize
 layout iterm AFTER focus 'iTerm'
 bind n:ctrl layout iterm
 
-throw google_chrome 'Google Chrome' 0 resize
-layout google_chrome AFTER focus 'Google Chrome'
-bind i:ctrl layout google_chrome
+layout browser 'Google Chrome' throw 0 resize
+layout browser AFTER focus 'Google Chrome'
+bind i:ctrl layout browser
 
-throw google_chrome 'Google Chrome' 1 resize
+layout google_chrome 'Google Chrome' throw 1 resize
 layout google_chrome AFTER focus 'Google Chrome'
 bind i:cmd;ctrl layout google_chrome
 
-throw firefox 'Firefox' 1 resize
+layout firefox 'Firefox' throw 1 resize
 layout firefox AFTER focus 'Firefox'
 bind o:cmd;ctrl layout firefox
 
-throw safari 'Safari' 1 resize
+layout safari 'Safari' throw 1 resize
 layout safari AFTER focus 'Safari'
 bind p:cmd;ctrl layout safari
 
