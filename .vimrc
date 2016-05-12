@@ -22,6 +22,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
 Plugin 'godlygeek/tabular'
+Plugin 'fatih/vim-go'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/syntastic'
@@ -33,7 +34,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'majutsushi/tagbar'
 Plugin 'sevko/vim-nand2tetris-syntax'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'ternjs/tern_for_vim'
+Plugin 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plugin 'ruanyl/vim-fixmyjs'
 
 " Git plugin not hosted on GitHub
