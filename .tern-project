@@ -2,12 +2,23 @@
     "libs": [
         "browser",
         "ecma5",
-        "jasmine"
+        "chai",
+        "ecma6"
     ],
     "loadEagerly": [
         "src/**/*.js"
     ],
     "plugins": {
-        "node": {}
+        "node": {},
+        "node_resolve": {},
+        "modules": {},
+        "es_modules": {},
+        "complete_strings": {
+            "maxLength": 20
+        },
+        "requirejs": {
+            "baseURL": "./src/"
+        },
+        "webpack": {}
     }
 }
