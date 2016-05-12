@@ -13,6 +13,10 @@ layout iterm 'iTerm' throw 1 resize
 layout iterm AFTER focus 'iTerm'
 bind n:ctrl layout iterm
 
+layout spotify 'Spotify' throw 0 resize
+layout spotify AFTER focus 'Spotify'
+bind n:cmd;ctrl layout spotify
+
 layout browser 'Google Chrome' throw 0 resize
 layout browser AFTER focus 'Google Chrome'
 bind i:ctrl layout browser
