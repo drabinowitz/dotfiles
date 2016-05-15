@@ -8,38 +8,6 @@ config resizePercentOf screenSize
 # Relaunch binding
 bind r:cmd;ctrl relaunch
 
-# Layout bindings
-layout iterm 'iTerm' throw 1 resize
-layout iterm AFTER focus 'iTerm'
-bind n:ctrl layout iterm
-
-layout spotify 'Spotify' throw 0 resize
-layout spotify AFTER focus 'Spotify'
-bind n:cmd;ctrl layout spotify
-
-layout browser 'Google Chrome' throw 0 resize
-layout browser AFTER focus 'Google Chrome'
-bind i:ctrl layout browser
-
-layout browserIterm 'Google Chrome' throw 1 resize:screenSizeX/2;screenSizeY
-layout browserIterm 'iTerm' throw 1
-layout browserIterm 'iTerm' corner top-right resize:screenSizeX/2;screenSizeY
-layout browserIterm AFTER focus 'Google Chrome'
-layout browserIterm AFTER focus 'iTerm'
-bind m:cmd;ctrl layout browserIterm
-
-layout google_chrome 'Google Chrome' throw 1 resize
-layout google_chrome AFTER focus 'Google Chrome'
-bind i:cmd;ctrl layout google_chrome
-
-layout firefox 'Firefox' throw 1 resize
-layout firefox AFTER focus 'Firefox'
-bind o:cmd;ctrl layout firefox
-
-layout safari 'Safari' throw 1 resize
-layout safari AFTER focus 'Safari'
-bind p:cmd;ctrl layout safari
-
 # Resize Bindings
 bind right:alt       resize +10% +0
 bind left:alt        resize -10% +0
