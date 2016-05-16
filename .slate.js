@@ -64,12 +64,13 @@ function throwOp (screenId, screenSizeX, screenSizeY, screenOriginX, screenOrigi
 function getSlateLayoutRecord (name, params) {
     return {
         name: name,
-        params: params,
-        operation: slate.operation('layout', {
-            'name': slate.layout(name, params)
-        })
+        params: Object.assign({
+            'repeat': true
+        }, params)
     }
 }
+
+var relaunch = slate.operation('relaunch');
 
 var iTermLayout = getSlateLayoutRecord('iTerm', {
     'iTerm': {
@@ -104,18 +105,30 @@ var googleChromeITermLayout = getSlateLayoutRecord('Google Chrome iTerm', {
 var mainGoogleChromeLayout = getSlateLayoutRecord('Main:Google Chrome', {
     'Google Chrome': {
         'operations': [throwOp('1')]
+    },
+
+    '_after_': {
+        'operations': [relaunch]
     }
 });
 
 var mainFirefoxLayout = getSlateLayoutRecord('Main:Firefox', {
     'Firefox': {
         'operations': [throwOp('1')]
+    },
+
+    '_after_': {
+        'operations': [relaunch]
     }
 });
 
 var mainSafariLayout = getSlateLayoutRecord('Main:Safari', {
     'Safari': {
         'operations': [throwOp('1')]
+    },
+
+    '_after_': {
+        'operations': [relaunch]
     }
 });
 
@@ -139,7 +152,6 @@ function runIf(name) {
 }
 
 function makeLayoutOp (layoutRecord) {
-    return layoutRecord.operation;
     return function () {
         for (var app in layoutRecord.params) {
             if (layoutRecord.params.hasOwnProperty(app)) {
@@ -149,7 +161,9 @@ function makeLayoutOp (layoutRecord) {
             }
         }
 
-        layoutRecord.operation.run();
+        slate.operation('layout', {
+            'name': slate.layout(layoutRecord.name, layoutRecord.params)
+        }).run();
     };
 }
 
