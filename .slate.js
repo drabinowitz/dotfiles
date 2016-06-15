@@ -96,7 +96,7 @@ function getSlateLayoutRecord (name, params) {
     }
 }
 
-var iTermLayout = getSlateLayoutRecord('iTerm', layoutThrowOp('iTerm', '1'));
+var iTerm2Layout = getSlateLayoutRecord('iTerm2', layoutThrowOp('iTerm2', '1'));
 
 var spotifyLayout = getSlateLayoutRecord('Spotify', layoutThrowOp('Spotify', '0'));
 
@@ -107,7 +107,7 @@ var intellijIdeaLayout = getSlateLayoutRecord('IntelliJ IDEA', layoutThrowOp('In
 var googleChromeITermLayout = getSlateLayoutRecord('Google Chrome iTerm',
     Object.assign(
         layoutThrowOp('Google Chrome', '0', 'screenSizeX/2'),
-        layoutThrowOp('iTerm', '0', 'screenSizeX/2', 'screenSizeY', 'screenOriginX+newWindowSizeX'))
+        layoutThrowOp('iTerm2', '0', 'screenSizeX/2', 'screenSizeY', 'screenOriginX+newWindowSizeX'))
 );
 
 var isDirty = false;
@@ -129,7 +129,7 @@ function runBeforeThrowLayoutOp (appName) {
 }
 
 var runIfMap = {
-    'iTerm': '/Applications/iTerm 2.app',
+    'iTerm2': '/Applications/iTerm 2.app',
     'Google Chrome': '/Applications/Google Chrome.app',
     'Firefox': '/Applications/Firefox.app',
     'Safari': '/Applications/Safari.app',
@@ -177,7 +177,7 @@ function makeLayoutOp (layoutRecord) {
     });
 }
 
-slate.bind('n:ctrl', makeLayoutOp(iTermLayout));
+slate.bind('n:ctrl', makeLayoutOp(iTerm2Layout));
 slate.bind('i:ctrl', makeLayoutOp(googleChromeLayout));
 
 slate.bind('n:cmd;ctrl', makeLayoutOp(spotifyLayout));
@@ -187,3 +187,11 @@ slate.bind('u:cmd;ctrl', makeLayoutOp(intellijIdeaLayout));
 slate.bind('i:cmd;ctrl', makeLayoutOp(mainGoogleChromeLayout));
 slate.bind('o:cmd;ctrl', makeLayoutOp(mainFirefoxLayout));
 slate.bind('p:cmd;ctrl', makeLayoutOp(mainSafariLayout));
+
+slate.bind('q:cmd;ctrl', slate.operation('hide', {
+    'app': ['IntelliJ IDEA']
+}));
+
+slate.bind('w:cmd;ctrl', slate.operation('show', {
+    'app': ['IntelliJ IDEA']
+}));
