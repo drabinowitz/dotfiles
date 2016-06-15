@@ -97,7 +97,7 @@ map! <F2> :call TrimWhiteSpace()<CR>
 let g:airline#extensions#tabline#enabled = 1
 
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
-let &colorcolumn="100,".join(range(150,999),",")
+let &colorcolumn="80,".join(range(120,999),",")
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
