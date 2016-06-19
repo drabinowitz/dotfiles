@@ -150,26 +150,11 @@ function runIfOp (name) {
     };
 }
 
-var mainGoogleChromeLayout = getSlateLayoutRecord('Main:Google Chrome', runBeforeThrowLayoutOp('Google Chrome', '1')
+var mainGoogleChromeLayout = getSlateLayoutRecord('Main:Google Chrome', runBeforeThrowLayoutOp('Google Chrome', '1'));
 
-    //'_after_': {
-    //    'operations': [relaunchIfDirty]
-    //}
-);
+var mainFirefoxLayout = getSlateLayoutRecord('Main:Firefox', runBeforeThrowLayoutOp('Firefox', '1'));
 
-var mainFirefoxLayout = getSlateLayoutRecord('Main:Firefox', runBeforeThrowLayoutOp('Firefox', '1')
-
-    //'_after_': {
-    //    'operations': [relaunchIfDirty]
-    //}
-);
-
-var mainSafariLayout = getSlateLayoutRecord('Main:Safari', runBeforeThrowLayoutOp('Safari', '1')
-
-    //'_after_': {
-    //    'operations': [relaunchIfDirty]
-    //}
-);
+var mainSafariLayout = getSlateLayoutRecord('Main:Safari', runBeforeThrowLayoutOp('Safari', '1'));
 
 function makeLayoutOp (layoutRecord) {
     return slate.operation('layout', {
@@ -189,9 +174,5 @@ slate.bind('o:cmd;ctrl', makeLayoutOp(mainFirefoxLayout));
 slate.bind('p:cmd;ctrl', makeLayoutOp(mainSafariLayout));
 
 slate.bind('q:cmd;ctrl', slate.operation('hide', {
-    'app': ['IntelliJ IDEA']
-}));
-
-slate.bind('w:cmd;ctrl', slate.operation('show', {
-    'app': ['IntelliJ IDEA']
+    'app': ['current']
 }));
