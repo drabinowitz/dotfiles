@@ -176,3 +176,9 @@ slate.bind('p:cmd;ctrl', makeLayoutOp(mainSafariLayout));
 slate.bind('q:cmd;ctrl', slate.operation('hide', {
     'app': ['current']
 }));
+
+slate.bind('w:cmd;ctrl', slate.operation('corner', {
+    'direction': 'top-left'
+}));
+
+slate.bind('space:ctrl', slate.operation('switch'));
