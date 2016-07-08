@@ -34,7 +34,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'majutsushi/tagbar'
 Plugin 'sevko/vim-nand2tetris-syntax'
 Plugin 'airblade/vim-gitgutter'
-" Plugin 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plugin 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plugin 'ruanyl/vim-fixmyjs'
 
 " Git plugin not hosted on GitHub
