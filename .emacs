@@ -14,4 +14,6 @@
 (require 'evil-extra-operator)
 (require 'evil-args)
 (require 'evil-visualstar)
+(require 'color-theme-approximate)
 (evil-mode 1)
+(color-theme-approximate-on)
