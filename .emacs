@@ -16,12 +16,17 @@
 (require 'evil-visualstar)
 (require 'evil-mc)
 (require 'evil-tabs)
+(require 'evil-search-highlight-persist)
 (require 'color-theme-approximate)
 (require 'helm-config)
 
 (evil-mode 1)
 (global-evil-mc-mode 1)
 (global-evil-tabs-mode t)
+(global-evil-search-highlight-persist t)
+(setq evil-leader/in-all-states 1)
+(global-evil-leader-mode)
+(evil-leader/set-leader ",")
 (color-theme-approximate-on)
 
 (setq evil-emacs-state-cursor '("red" box))
@@ -30,6 +35,8 @@
 (setq evil-insert-state-cursor '("red" bar))
 (setq evil-replace-state-cursor '("red" bar))
 (setq evil-operator-state-cursor '("red" hollow))
+
+(evil-leader/set-key "SPC" 'evil-search-highlight-persist-remove-all)
 
 (define-key evil-normal-state-map (kbd "C-0") (lambda() (interactive) (elscreen-goto 0)))
 (define-key evil-normal-state-map (kbd "C-1") (lambda() (interactive) (elscreen-goto 1)))
@@ -49,7 +56,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))))
+    (evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
