@@ -56,6 +56,10 @@
 (evil-leader/set-leader ",")
 (color-theme-approximate-on)
 
+;; save bookmarks
+(setq bookmark-default-file "~/.emacs.d/bookmarks"
+      bookmark-save-flag 1) ;; save after every change
+
 (setq evil-emacs-state-cursor '("red" box))
 (setq evil-normal-state-cursor '("green" box))
 (setq evil-visual-state-cursor '("orange" box))
