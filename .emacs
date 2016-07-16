@@ -18,7 +18,34 @@
 (require 'evil-tabs)
 (require 'evil-search-highlight-persist)
 (require 'color-theme-approximate)
+(require 'projectile)
+(require 'discover-my-major)
+
+;; helm settings (TAB in helm window for actions over selected items,
+;; C-SPC to select items)
 (require 'helm-config)
+(require 'helm-misc)
+(require 'helm-projectile)
+(require 'helm-locate)
+(helm-mode 1)
+(define-key evil-normal-state-map " " 'helm-mini)
+(setq helm-quick-update t)
+(setq helm-bookmark-show-location t)
+(setq helm-buffers-fuzzy-matching t)
+
+(helm-projectile-on)
+(global-set-key (kbd "M-x") 'helm-M-x)
+
+(defun helm-my-buffers ()
+    (interactive)
+    (let ((helm-ff-transformer-show-only-basename nil))
+    (helm-other-buffer '(helm-c-source-buffers-list
+                         helm-c-source-elscreen
+                         helm-c-source-projectile-files-list
+                         helm-c-source-ctags
+                         helm-c-source-recentf
+                         helm-c-source-locate)
+                         "*helm-my-buffers*")))
 
 (evil-mode 1)
 (global-evil-mc-mode 1)
@@ -56,7 +83,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))))
+    (discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
