@@ -23,6 +23,7 @@
 (require 'projectile)
 (require 'discover-my-major)
 (require 'powerline)
+(require 'cl)
 
 ;; helm settings (TAB in helm window for actions over selected items,
 ;; C-SPC to select items)
@@ -109,6 +110,19 @@
 ;; Works around the fact that Evil uses read-event directly when in operator state, which
 ;; doesn't use the key-translation-map.
 (define-key evil-operator-state-map (kbd "C-c") 'keyboard-quit)
+
+;; change mode-line color by evil state
+   (lexical-let ((default-color (cons (face-background 'mode-line)
+                                      (face-foreground 'mode-line))))
+     (add-hook 'post-command-hook
+       (lambda ()
+         (let ((color (cond ((minibufferp) default-color)
+                            ((evil-insert-state-p) '("#e80000" . "#ffffff"))
+                            ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
+                            ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
+                            (t default-color))))
+           (set-face-background 'mode-line (car color))
+           (set-face-foreground 'mode-line (cdr color))))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
