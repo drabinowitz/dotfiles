@@ -55,6 +55,7 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader ",")
 (color-theme-approximate-on)
+(evilem-default-keybindings ".")
 
 ;; save bookmarks
 (setq bookmark-default-file "~/.emacs.d/bookmarks"
