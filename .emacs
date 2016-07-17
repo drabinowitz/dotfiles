@@ -39,12 +39,12 @@
 (defun helm-my-buffers ()
     (interactive)
     (let ((helm-ff-transformer-show-only-basename nil))
-    (helm-other-buffer '(helm-c-source-buffers-list
-                         helm-c-source-elscreen
-                         helm-c-source-projectile-files-list
-                         helm-c-source-ctags
-                         helm-c-source-recentf
-                         helm-c-source-locate)
+    (helm-other-buffer '(helm-source-buffers-list
+                         ;; helm-source-elscreen
+                         helm-source-projectile-files-list
+                         ;; helm-source-ctags
+                         helm-source-recentf
+                         helm-source-locate)
                          "*helm-my-buffers*")))
 
 (evil-mode 1)
@@ -56,6 +56,7 @@
 (evil-leader/set-leader ",")
 (color-theme-approximate-on)
 (evilem-default-keybindings ".")
+(evil-leader/set-key "e" 'helm-my-buffers)
 
 ;; save bookmarks
 (setq bookmark-default-file "~/.emacs.d/bookmarks"
