@@ -20,6 +20,7 @@
 (require 'color-theme-approximate)
 (require 'projectile)
 (require 'discover-my-major)
+(require 'powerline)
 
 ;; helm settings (TAB in helm window for actions over selected items,
 ;; C-SPC to select items)
@@ -56,6 +57,7 @@
 (evil-leader/set-leader ",")
 (color-theme-approximate-on)
 (evil-leader/set-key "e" 'helm-my-buffers)
+(powerline-default-theme)
 
 (evilem-default-keybindings "SPC")
 (evilem-define (kbd "SPC w") 'evil-forward-word-begin)
@@ -94,7 +96,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))))
+    (powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
