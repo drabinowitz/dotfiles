@@ -25,6 +25,9 @@
 (require 'powerline)
 (require 'cl)
 (require 'flycheck)
+(require 'auto-complete)
+(require 'tern)
+(require 'tern-auto-complete)
 
 ;; helm settings (TAB in helm window for actions over selected items,
 ;; C-SPC to select items)
@@ -64,6 +67,9 @@
 (powerline-default-theme)
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+(setq-default tab-width 4 indent-tabs-mode nil)
+(define-key global-map (kbd "RET") 'newline-and-indent)
+(ac-config-default)
 
 (global-flycheck-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -136,6 +142,12 @@
            (set-face-background 'mode-line (car color))
            (set-face-foreground 'mode-line (cdr color))))))
 
+;; Add ac-source-dictionary to ac-sources of all buffer
+(defun ac-js-setup ()
+  (setq ac-sources (append ac-sources '(ac-source-tern-completion))))
+
+(add-hook 'js-mode 'ac-js-setup)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -143,7 +155,9 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))))
+    (tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
+ '(tern-ac-on-dot t)
+ '(tern-ac-sync t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
