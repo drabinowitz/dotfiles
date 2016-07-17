@@ -2,6 +2,8 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
+(setq evil-want-C-u-scroll t)
+
 (require 'evil)
 (require 'evil-numbers)
 (require 'evil-easymotion)
@@ -58,6 +60,8 @@
 (color-theme-approximate-on)
 (evil-leader/set-key "e" 'helm-my-buffers)
 (powerline-default-theme)
+(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
 (evilem-default-keybindings "SPC")
 (evilem-define (kbd "SPC w") 'evil-forward-word-begin)
