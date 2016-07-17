@@ -28,7 +28,7 @@
 (require 'helm-projectile)
 (require 'helm-locate)
 (helm-mode 1)
-(define-key evil-normal-state-map " " 'helm-mini)
+(define-key evil-normal-state-map (kbd "M-SPC") 'helm-mini)
 (setq helm-quick-update t)
 (setq helm-bookmark-show-location t)
 (setq helm-buffers-fuzzy-matching t)
@@ -55,8 +55,13 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader ",")
 (color-theme-approximate-on)
-(evilem-default-keybindings ".")
 (evil-leader/set-key "e" 'helm-my-buffers)
+
+(evilem-default-keybindings "SPC")
+(evilem-define (kbd "SPC w") 'evil-forward-word-begin)
+(evilem-define (kbd "SPC e") 'evil-forward-word-end)
+(evilem-define (kbd "SPC b") 'evil-backward-word-begin)
+(evilem-define (kbd "SPC ge") 'evil-backward-word-end)
 
 ;; save bookmarks
 (setq bookmark-default-file "~/.emacs.d/bookmarks"
