@@ -24,6 +24,7 @@
 (require 'discover-my-major)
 (require 'powerline)
 (require 'cl)
+(require 'flycheck)
 
 ;; helm settings (TAB in helm window for actions over selected items,
 ;; C-SPC to select items)
@@ -63,6 +64,17 @@
 (powerline-default-theme)
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+
+(global-flycheck-mode)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+;; disable jshint since we prefer eslint checking
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+    '(javascript-jshint)))
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+(set-face-attribute 'flycheck-warning nil
+                    :foreground "yellow"
+                    :background "red")
 
 (evilem-default-keybindings "SPC")
 (evilem-define (kbd "SPC w") 'evil-forward-word-begin)
@@ -131,7 +143,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))))
+    (flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
