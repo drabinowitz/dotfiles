@@ -48,7 +48,7 @@
     (interactive)
     (let ((helm-ff-transformer-show-only-basename nil))
     (helm-other-buffer '(helm-source-buffers-list
-                         ;; helm-source-elscreen
+                         helm-source-elscreen-list
                          helm-source-projectile-files-list
                          ;; helm-source-ctags
                          helm-source-recentf
