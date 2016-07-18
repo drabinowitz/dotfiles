@@ -67,9 +67,12 @@
 (powerline-default-theme)
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-(setq-default tab-width 4 indent-tabs-mode nil)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (ac-config-default)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+(global-set-key (kbd "TAB") 'self-insert-command)
 
 (global-flycheck-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -111,6 +114,13 @@
 (define-key evil-normal-state-map (kbd "C-7") (lambda() (interactive) (elscreen-goto 7)))
 (define-key evil-normal-state-map (kbd "C-8") (lambda() (interactive) (elscreen-goto 8)))
 (define-key evil-normal-state-map (kbd "C-9") (lambda() (interactive) (elscreen-goto 9)))
+
+(load "elscreen" "ElScreen" t)
+(elscreen-start)
+(define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;creat tab
+(define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
+(define-key evil-normal-state-map "gT" 'elscreen-previous) ;previous tab
+(define-key evil-normal-state-map "gt" 'elscreen-next) ;next tab
 
 ;;; C-c as general purpose escape key sequence.
 ;;;
