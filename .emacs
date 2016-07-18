@@ -41,6 +41,8 @@
 (setq helm-quick-update t)
 (setq helm-bookmark-show-location t)
 (setq helm-buffers-fuzzy-matching t)
+(setq helm-recentf-fuzzy-match t)
+(setq helm-M-x-fuzzy-match t)
 
 (helm-projectile-on)
 (global-set-key (kbd "M-x") 'helm-M-x)
