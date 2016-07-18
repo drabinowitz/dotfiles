@@ -28,6 +28,7 @@
 (require 'auto-complete)
 (require 'tern)
 (require 'tern-auto-complete)
+(require 'clean-aindent-mode)
 
 ;; helm settings (TAB in helm window for actions over selected items,
 ;; C-SPC to select items)
@@ -164,7 +165,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
+    (clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
  '(tern-ac-on-dot t)
  '(tern-ac-sync t))
 (custom-set-faces
