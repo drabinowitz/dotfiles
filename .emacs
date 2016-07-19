@@ -159,8 +159,57 @@
 ;; Add ac-source-dictionary to ac-sources of all buffer
 (defun ac-js-setup ()
   (setq ac-sources (append ac-sources '(ac-source-tern-completion))))
-
 (add-hook 'js-mode 'ac-js-setup)
+
+;; COPIED FROM EVIL-TMUX_NAVIGATOR https://github.com/keith/evil-tmux-navigator
+; Without unsetting C-h this is useless
+(global-unset-key (kbd "C-h"))
+
+; This requires windmove commands
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+
+(defun tmux-navigate (direction)
+  (let
+    ((cmd (concat "windmove-" direction)))
+      (condition-case nil
+          (funcall (read cmd))
+        (error
+          (tmux-command direction)))))
+
+(defun tmux-command (direction)
+  (shell-command-to-string
+    (concat "tmux select-pane -"
+      (tmux-direction direction))))
+
+(defun tmux-direction (direction)
+  (upcase
+    (substring direction 0 1)))
+
+(define-key evil-normal-state-map
+            (kbd "C-h")
+            (lambda ()
+              (interactive)
+              (tmux-navigate "left")))
+(define-key evil-normal-state-map
+            (kbd "C-j")
+            (lambda ()
+              (interactive)
+              (tmux-navigate "down")))
+(define-key evil-normal-state-map
+            (kbd "C-k")
+            (lambda ()
+              (interactive)
+              (tmux-navigate "up")))
+(define-key evil-normal-state-map
+            (kbd "C-l")
+            (lambda ()
+              (interactive)
+              (tmux-navigate "right")))
+
+(evil-leader/set-key "v" 'split-window-right)
+(evil-leader/set-key "C-l" 'split-window-right)
+(evil-leader/set-key "s" 'split-window-below)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
