@@ -208,8 +208,10 @@
               (tmux-navigate "right")))
 
 (evil-leader/set-key "v" 'split-window-right)
-(evil-leader/set-key "C-l" 'split-window-right)
 (evil-leader/set-key "s" 'split-window-below)
+
+(define-key helm-map (kbd "C-k") 'helm-previous-line)
+(define-key helm-map (kbd "C-j") 'helm-next-line)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
