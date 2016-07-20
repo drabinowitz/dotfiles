@@ -54,9 +54,9 @@
     (let ((helm-ff-transformer-show-only-basename nil))
     (helm-other-buffer '(helm-source-buffers-list
                          helm-source-elscreen-list
+                         helm-source-recentf
                          helm-source-projectile-files-list
                          ;; helm-source-ctags
-                         helm-source-recentf
                          helm-source-locate)
                          "*helm-my-buffers*")))
 
