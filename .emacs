@@ -74,10 +74,10 @@
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (ac-config-default)
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq indent-line-function 'insert-tab)
-(global-set-key (kbd "TAB") 'self-insert-command)
+(define-key text-mode-map (kbd "<tab>") 'tab-to-tab-stop)
+(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
+                      64 68 72 76 80 84 88 92 96 100 104 108 112
+                      116 120))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
