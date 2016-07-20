@@ -78,6 +78,7 @@
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 (global-set-key (kbd "TAB") 'self-insert-command)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
