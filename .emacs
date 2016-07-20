@@ -36,6 +36,8 @@
 (require 'helm-misc)
 (require 'helm-projectile)
 (require 'helm-locate)
+
+(setq helm-split-window-in-side-p t)
 (helm-mode 1)
 (define-key evil-normal-state-map (kbd "M-SPC") 'helm-mini)
 (setq helm-quick-update t)
