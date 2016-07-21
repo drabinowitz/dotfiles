@@ -66,6 +66,7 @@
 (global-evil-mc-mode 1)
 (global-evil-tabs-mode t)
 (global-evil-search-highlight-persist t)
+(global-evil-surround-mode 1)
 (setq evil-leader/in-all-states 1)
 (global-evil-leader-mode)
 (evil-leader/set-leader ",")
