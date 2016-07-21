@@ -29,6 +29,8 @@
 (require 'tern)
 (require 'tern-auto-complete)
 (require 'clean-aindent-mode)
+(require 'flycheck-flow)
+(require 'rainbow-delimiters)
 
 ;; helm settings (TAB in helm window for actions over selected items,
 ;; C-SPC to select items)
@@ -79,6 +81,7 @@
                       64 68 72 76 80 84 88 92 96 100 104 108 112
                       116 120))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -89,6 +92,8 @@
   (append flycheck-disabled-checkers
     '(javascript-jshint)))
 (flycheck-add-mode 'javascript-eslint 'web-mode)
+(flycheck-add-mode 'javascript-eslint 'js2-mode)
+(flycheck-add-mode 'javascript-flow 'js2-mode)
 (set-face-attribute 'flycheck-warning nil
                     :foreground "yellow"
                     :background "red")
@@ -223,7 +228,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
+    (rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
  '(tern-ac-on-dot t)
  '(tern-ac-sync t))
 (custom-set-faces
