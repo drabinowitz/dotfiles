@@ -32,6 +32,11 @@
 (require 'flycheck-flow)
 (require 'rainbow-delimiters)
 
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
+
 ;; helm settings (TAB in helm window for actions over selected items,
 ;; C-SPC to select items)
 (require 'helm-config)
@@ -77,6 +82,7 @@
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (ac-config-default)
+(setq-default indent-tabs-mode nil)
 (define-key text-mode-map (kbd "<tab>") 'tab-to-tab-stop)
 (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
                       64 68 72 76 80 84 88 92 96 100 104 108 112
@@ -165,10 +171,12 @@
            (set-face-background 'mode-line (car color))
            (set-face-foreground 'mode-line (cdr color))))))
 
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
 ;; Add ac-source-dictionary to ac-sources of all buffer
 (defun ac-js-setup ()
   (setq ac-sources (append ac-sources '(ac-source-tern-completion))))
 (add-hook 'js-mode 'ac-js-setup)
+(add-hook 'js2-mode 'ac-js-setup)
 
 ;; COPIED FROM EVIL-TMUX_NAVIGATOR https://github.com/keith/evil-tmux-navigator
 ; Without unsetting C-h this is useless
