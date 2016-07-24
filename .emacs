@@ -31,6 +31,7 @@
 (require 'clean-aindent-mode)
 (require 'flycheck-flow)
 (require 'rainbow-delimiters)
+(require 'helm-ag)
 
 (eval-after-load 'tern
    '(progn
@@ -77,6 +78,7 @@
 (evil-leader/set-leader ",")
 (color-theme-approximate-on)
 (evil-leader/set-key "e" 'helm-my-buffers)
+(evil-leader/set-key "a" 'helm-ag)
 (powerline-default-theme)
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
@@ -244,7 +246,7 @@
  '(flycheck-javascript-flow-args (quote ("status")))
  '(package-selected-packages
    (quote
-    (darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
+    (helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
  '(tern-ac-on-dot t)
  '(tern-ac-sync t))
 (custom-set-faces
