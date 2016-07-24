@@ -100,6 +100,7 @@
     '(javascript-jshint)))
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 (flycheck-add-mode 'javascript-eslint 'js2-mode)
+(flycheck-add-next-checker 'javascript-eslint 'javascript-flow)
 (flycheck-add-mode 'javascript-flow 'js2-mode)
 (set-face-attribute 'flycheck-warning nil
                     :foreground "yellow"
