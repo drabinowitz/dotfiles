@@ -113,6 +113,9 @@
 (set-face-attribute 'flycheck-warning nil
                     :foreground "yellow"
                     :background "red")
+(set-face-attribute 'flycheck-error nil
+                    :foreground "yellow"
+                    :background "red")
 
 (evilem-default-keybindings "SPC")
 (evilem-define (kbd "SPC w") 'evil-forward-word-begin)
@@ -249,7 +252,11 @@
    (quote
     ("c697b65591ba1fdda42fae093563867a95046466285459bd4e686dc95a819310" default)))
  '(evilem-style (quote at-full))
+ '(flycheck-eslintrc "./.eslintrc")
+ '(flycheck-highlighting-mode (quote lines))
+ '(flycheck-indication-mode (quote left-fringe))
  '(flycheck-javascript-flow-args (quote ("status")))
+ '(global-flycheck-mode t)
  '(package-selected-packages
    (quote
     (column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
