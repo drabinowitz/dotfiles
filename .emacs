@@ -33,6 +33,12 @@
 (require 'rainbow-delimiters)
 (require 'helm-ag)
 
+(require 'autopair)
+(autopair-global-mode)
+
+(require 'column-marker)
+(add-hook 'js-mode-hook (lambda () (interactive) (column-marker-1 81)))
+
 (eval-after-load 'tern
    '(progn
       (require 'tern-auto-complete)
@@ -246,7 +252,7 @@
  '(flycheck-javascript-flow-args (quote ("status")))
  '(package-selected-packages
    (quote
-    (helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
+    (column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
  '(tern-ac-on-dot t)
  '(tern-ac-sync t))
 (custom-set-faces
