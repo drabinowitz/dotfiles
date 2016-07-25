@@ -88,6 +88,7 @@
 (powerline-default-theme)
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+(define-key evil-normal-state-map (kbd "r") 'tern-rename-variable)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (ac-config-default)
 (setq-default indent-tabs-mode nil)
