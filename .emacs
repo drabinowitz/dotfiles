@@ -34,9 +34,6 @@
 (require 'helm-ag)
 (require 'org)
 
-(require 'autopair)
-(autopair-global-mode)
-
 (require 'column-marker)
 (add-hook 'js-mode-hook (lambda () (interactive) (column-marker-1 81)))
 
