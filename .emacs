@@ -250,7 +250,7 @@
  '(custom-safe-themes
    (quote
     ("c697b65591ba1fdda42fae093563867a95046466285459bd4e686dc95a819310" default)))
- '(evilem-style (quote at-full))
+ '(evilem-style (quote at))
  '(flycheck-eslintrc "./.eslintrc")
  '(flycheck-highlighting-mode (quote symbols))
  '(flycheck-indication-mode (quote left-fringe))
