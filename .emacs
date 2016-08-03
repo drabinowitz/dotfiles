@@ -72,6 +72,7 @@
                          helm-source-locate)
                          "*helm-my-buffers*")))
 
+(setq backup-directory-alist `(("." . "~/.saves")))
 (evil-mode 1)
 (global-evil-mc-mode 1)
 (global-evil-tabs-mode t)
