@@ -33,6 +33,7 @@
 (require 'rainbow-delimiters)
 (require 'helm-ag)
 (require 'org)
+(require 'magit)
 
 (require 'column-marker)
 (add-hook 'js-mode-hook (lambda () (interactive) (column-marker-1 81)))
@@ -74,6 +75,7 @@
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 (evil-mode 1)
+(require 'evil-magit)
 (global-evil-mc-mode 1)
 (global-evil-tabs-mode t)
 (global-evil-search-highlight-persist t)
@@ -83,8 +85,9 @@
 (evil-leader/set-leader ",")
 (color-theme-approximate-on)
 (evil-leader/set-key "e" 'helm-my-buffers)
-(evil-leader/set-key "a" 'helm-ag)
+(evil-leader/set-key "a" 'helm-do-ag-project-root)
 (evil-leader/set-key "r" 'tern-rename-variable)
+(evil-leader/set-key "g" 'magit-status)
 (powerline-default-theme)
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
@@ -242,7 +245,20 @@
 (define-key helm-map (kbd "C-k") 'helm-previous-line)
 (define-key helm-map (kbd "C-j") 'helm-next-line)
 
+(defun eslint-fix-file ()
+  (interactive)
+  (message "eslint --fixing the file" (buffer-file-name))
+  (shell-command (concat "eslint --fix " (buffer-file-name))))
+
+(defun eslint-fix-file-and-revert ()
+  (interactive)
+  (eslint-fix-file)
+  (revert-buffer t t))
+
+(evil-leader/set-key "f" 'eslint-fix-file-and-revert)
+
 (advice-add 'split-window-right :after #'balance-windows)
+(advice-add 'evil-quit :after #'balance-windows)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -254,6 +270,7 @@
  '(custom-safe-themes
    (quote
     ("c697b65591ba1fdda42fae093563867a95046466285459bd4e686dc95a819310" default)))
+ '(evil-magit-use-y-for-yank t)
  '(evilem-style (quote at))
  '(flycheck-eslintrc "./.eslintrc")
  '(flycheck-highlighting-mode (quote symbols))
@@ -262,7 +279,7 @@
  '(global-flycheck-mode t)
  '(package-selected-packages
    (quote
-    (magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
+    (evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
  '(tern-ac-on-dot t)
  '(tern-ac-sync t))
 (custom-set-faces
