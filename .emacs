@@ -4,6 +4,7 @@
 
 (setq evil-want-C-u-scroll t)
 
+(require 'avy)
 (require 'evil)
 (require 'evil-numbers)
 (require 'evil-easymotion)
@@ -271,7 +272,7 @@
    (quote
     ("c697b65591ba1fdda42fae093563867a95046466285459bd4e686dc95a819310" default)))
  '(evil-magit-use-y-for-yank t)
- '(evilem-style (quote at))
+ '(evilem-style (quote at-full))
  '(flycheck-eslintrc "./.eslintrc")
  '(flycheck-highlighting-mode (quote symbols))
  '(flycheck-indication-mode (quote left-fringe))
@@ -287,4 +288,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(avy-lead-face-0 ((t (:background "color-52" :foreground "white"))))
+ '(avy-lead-face-1 ((t (:background "color-55" :foreground "white"))))
+ '(avy-lead-face-2 ((t (:background "color-57" :foreground "white")))))
