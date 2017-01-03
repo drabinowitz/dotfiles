@@ -114,10 +114,12 @@
 (setq-default flycheck-disabled-checkers
   (append flycheck-disabled-checkers
     '(javascript-jshint)))
-(flycheck-add-mode 'javascript-eslint 'web-mode)
-(flycheck-add-mode 'javascript-eslint 'js2-mode)
-(flycheck-add-next-checker 'javascript-eslint 'javascript-flow)
-(flycheck-add-mode 'javascript-flow 'js2-mode)
+(add-hook 'javascript-mode-hook 'flycheck-mode)
+(with-eval-after-load 'flycheck
+    (flycheck-add-mode 'javascript-eslint 'web-mode)
+    (flycheck-add-mode 'javascript-eslint 'js2-mode)
+    (flycheck-add-mode 'javascript-flow 'js2-mode)
+    (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
 (set-face-attribute 'flycheck-warning nil
                     :foreground "yellow"
                     :background "red")
