@@ -51,6 +51,10 @@
 (require 'helm-projectile)
 (require 'helm-locate)
 
+;;(autoload 'octave-mode "octave-mod" nil t)
+;;(setq auto-mode-alist
+;;      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
 (setq helm-split-window-in-side-p t)
 (helm-mode 1)
 (define-key evil-normal-state-map (kbd "M-SPC") 'helm-mini)
@@ -276,7 +280,6 @@
  '(flycheck-eslintrc "./.eslintrc")
  '(flycheck-highlighting-mode (quote symbols))
  '(flycheck-indication-mode (quote left-fringe))
- '(flycheck-javascript-flow-args (quote ("status")))
  '(global-flycheck-mode t)
  '(package-selected-packages
    (quote
