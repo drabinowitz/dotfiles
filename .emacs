@@ -284,6 +284,7 @@
  '(flycheck-eslintrc "./.eslintrc")
  '(flycheck-highlighting-mode (quote symbols))
  '(flycheck-indication-mode (quote left-fringe))
+ '(flycheck-javascript-flow-args (quote ("--respect-pragma")))
  '(global-flycheck-mode t)
  '(package-selected-packages
    (quote
