@@ -71,7 +71,7 @@
     (interactive)
     (let ((helm-ff-transformer-show-only-basename nil))
     (helm-other-buffer '(helm-source-buffers-list
-                         helm-source-elscreen-list
+                         ;; helm-source-elscreen-list
                          helm-source-recentf
                          helm-source-projectile-files-list
                          ;; helm-source-ctags
@@ -278,7 +278,7 @@
  '(custom-enabled-themes (quote (darcula)))
  '(custom-safe-themes
    (quote
-    ("c697b65591ba1fdda42fae093563867a95046466285459bd4e686dc95a819310" default)))
+    ("fad38808e844f1423c68a1888db75adf6586390f5295a03823fa1f4959046f81" "c697b65591ba1fdda42fae093563867a95046466285459bd4e686dc95a819310" default)))
  '(evil-magit-use-y-for-yank t)
  '(evilem-style (quote at-full))
  '(flycheck-eslintrc "./.eslintrc")
@@ -286,6 +286,7 @@
  '(flycheck-indication-mode (quote left-fringe))
  '(flycheck-javascript-flow-args (quote ("--respect-pragma")))
  '(global-flycheck-mode t)
+ '(js2-mode-show-parse-errors nil)
  '(package-selected-packages
    (quote
     (evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
