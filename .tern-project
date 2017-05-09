@@ -1,9 +1,9 @@
 {
     "libs": [
         "browser",
-        "ecma5",
+        "ecmascript",
         "chai",
-        "ecma6"
+        "underscore"
     ],
     "loadEagerly": [
         "src/**/*.js"
