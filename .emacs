@@ -49,11 +49,12 @@
 (require 'helm-config)
 (require 'helm-misc)
 (require 'helm-projectile)
-(require 'helm-locate)
 
 ;;(autoload 'octave-mode "octave-mod" nil t)
 ;;(setq auto-mode-alist
 ;;      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+(projectile-mode)
 
 (setq helm-split-window-in-side-p t)
 (helm-mode 1)
@@ -63,6 +64,7 @@
 (setq helm-buffers-fuzzy-matching t)
 (setq helm-recentf-fuzzy-match t)
 (setq helm-M-x-fuzzy-match t)
+(setq projectile-enable-caching t)
 
 (helm-projectile-on)
 (global-set-key (kbd "M-x") 'helm-M-x)
@@ -75,7 +77,7 @@
                          helm-source-recentf
                          helm-source-projectile-files-list
                          ;; helm-source-ctags
-                         helm-source-locate)
+                         )
                          "*helm-my-buffers*")))
 
 (setq backup-directory-alist `(("." . "~/.saves")))
