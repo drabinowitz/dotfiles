@@ -35,6 +35,7 @@
 (require 'helm-ag)
 (require 'org)
 (require 'magit)
+(require 'typescript)
 
 (require 'column-marker)
 (add-hook 'js-mode-hook (lambda () (interactive) (column-marker-1 81)))
@@ -109,9 +110,21 @@
                       116 120))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+(require 'tss)
+(tss-config-default)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
 (autoload 'jsx-mode "jsx-mode" "JSX mode" t)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+(flycheck-define-checker typescript
+  "A TypeScript syntax checker using tsc command."
+  :command ("tsc" "--out" "/dev/null" source)
+  :error-patterns
+  ((error line-start (file-name) "(" line "," column "): error " (message) line-end))
+  :modes (typescript-mode))
+
+(add-to-list 'flycheck-checkers 'typescript)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -126,6 +139,7 @@
     (flycheck-add-mode 'javascript-eslint 'web-mode)
     (flycheck-add-mode 'javascript-eslint 'js2-mode)
     (flycheck-add-mode 'javascript-flow 'js2-mode)
+    (flycheck-add-mode 'typescript 'typescript-mode)
     (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
 (set-face-attribute 'flycheck-warning nil
                     :foreground "yellow"
@@ -294,7 +308,7 @@
  '(js2-mode-show-parse-errors nil)
  '(package-selected-packages
    (quote
-    (typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
+    (tss typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
  '(tern-ac-on-dot t)
  '(tern-ac-sync t))
 (custom-set-faces
