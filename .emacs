@@ -119,7 +119,7 @@
 
 (flycheck-define-checker typescript
   "A TypeScript syntax checker using tsc command."
-  :command ("tsc" "--out" "/dev/null" source)
+  :command ("tsc" "--strict" "--out" "/dev/null" source)
   :error-patterns
   ((error line-start (file-name) "(" line "," column "): error " (message) line-end))
   :modes (typescript-mode))
