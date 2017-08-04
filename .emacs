@@ -286,6 +286,7 @@
 (evil-leader/set-key "f" 'eslint-fix-file-and-revert)
 
 (advice-add 'split-window-right :after #'balance-windows)
+(advice-add 'split-window-below :after #'balance-windows)
 (advice-add 'evil-quit :after #'balance-windows)
 
 (custom-set-variables
