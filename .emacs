@@ -229,6 +229,7 @@ See URL `http://flowtype.org/'."
 (evil-leader/set-key "g" 'magit-status)
 (evil-leader/set-key "c" 'magit-checkout)
 (evil-leader/set-key "b" 'magit-branch-and-checkout)
+(evil-leader/set-key "d" 'magit-branch-delete)
 (powerline-default-theme)
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
