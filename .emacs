@@ -347,6 +347,7 @@ See URL `http://flowtype.org/'."
            (set-face-foreground 'mode-line (cdr color))))))
 
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 ;; Add ac-source-dictionary to ac-sources of all buffer
 (defun ac-js-setup ()
   (setq ac-sources (append ac-sources '(ac-source-tern-completion))))
