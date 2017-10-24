@@ -352,6 +352,7 @@ See URL `http://flowtype.org/'."
   (setq ac-sources (append ac-sources '(ac-source-tern-completion))))
 (add-hook 'js-mode 'ac-js-setup)
 (add-hook 'js2-mode 'ac-js-setup)
+(add-hook 'jsx-mode 'ac-js-setup)
 
 ;; COPIED FROM EVIL-TMUX_NAVIGATOR https://github.com/keith/evil-tmux-navigator
 ; Without unsetting C-h this is useless
@@ -441,7 +442,7 @@ See URL `http://flowtype.org/'."
  '(js2-mode-show-parse-errors nil)
  '(package-selected-packages
    (quote
-    (string-inflection tss typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
+    (string-inflection tss typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
  '(tern-ac-on-dot t)
  '(tern-ac-sync t))
 (custom-set-faces
