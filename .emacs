@@ -454,5 +454,5 @@ See URL `http://flowtype.org/'."
  '(avy-lead-face-0 ((t (:background "color-52" :foreground "white"))))
  '(avy-lead-face-1 ((t (:background "color-55" :foreground "white"))))
  '(avy-lead-face-2 ((t (:background "color-57" :foreground "white"))))
- '(js2-function-call ((t (:inherit default :foreground "brightblue"))))
+ '(js2-function-call ((t (:inherit default :foreground "color-110"))))
  '(js2-object-property ((t (:inherit default :foreground "color-109")))))
