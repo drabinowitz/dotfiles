@@ -166,7 +166,7 @@ See URL `http://flowtype.org/'."
     ;; js3-mode doesn't support jsx
     :modes (js-mode js-jsx-mode js2-mode js2-jsx-mode js3-mode rjsx-mode))
 
-(add-to-list 'flycheck-checkers 'javascript-flow2)
+(add-to-list 'flycheck-checkers 'javascript-flow)
 
 (require 'column-marker)
 (add-hook 'js-mode-hook (lambda () (interactive) (column-marker-1 81)))
@@ -206,7 +206,6 @@ See URL `http://flowtype.org/'."
     (let ((helm-ff-transformer-show-only-basename nil))
     (helm-other-buffer '(helm-source-buffers-list
                          ;; helm-source-elscreen-list
-                         helm-source-recentf
                          helm-source-projectile-files-list
                          ;; helm-source-ctags
                          )
@@ -266,12 +265,12 @@ See URL `http://flowtype.org/'."
   (append flycheck-disabled-checkers
     '(javascript-jshint)))
 (add-hook 'javascript-mode-hook 'flycheck-mode)
+(add-hook 'rjsx-mode-hook 'flycheck-mode)
 (with-eval-after-load 'flycheck
-    (flycheck-add-mode 'javascript-eslint 'web-mode)
-    (flycheck-add-mode 'javascript-eslint 'js2-mode)
-    (flycheck-add-mode 'javascript-flow2 'js2-mode)
+    (flycheck-add-mode 'javascript-eslint 'rjsx-mode)
+    (flycheck-add-mode 'javascript-flow 'rjsx-mode)
     (flycheck-add-mode 'typescript 'typescript-mode)
-    (flycheck-add-next-checker 'javascript-flow2 'javascript-eslint))
+    (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
 (set-face-attribute 'flycheck-warning nil
                     :foreground "yellow"
                     :background "red")
@@ -431,7 +430,7 @@ See URL `http://flowtype.org/'."
  '(custom-enabled-themes (quote (darcula)))
  '(custom-safe-themes
    (quote
-    ("fad38808e844f1423c68a1888db75adf6586390f5295a03823fa1f4959046f81" "c697b65591ba1fdda42fae093563867a95046466285459bd4e686dc95a819310" default)))
+    ("3d5720f488f2ed54dd4e40e9252da2912110948366a16aef503f3e9e7dfe4915" "fad38808e844f1423c68a1888db75adf6586390f5295a03823fa1f4959046f81" "c697b65591ba1fdda42fae093563867a95046466285459bd4e686dc95a819310" default)))
  '(evil-magit-use-y-for-yank t)
  '(evilem-style (quote at-full))
  '(flycheck-eslintrc "./.eslintrc")
