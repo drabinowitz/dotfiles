@@ -128,30 +128,64 @@ hs.hotkey.bind({ "cmd", "ctrl", "shift" }, "k", function()
   end
 end)
 
-hs.hotkey.bind({ "cmd", "ctrl" }, "s", function()
-  spaces.changeToSpace(spaces.createSpace())
-end)
-
 hs.hotkey.bind({ "alt", "ctrl", "shift" }, "l", function()
-  hs.window.focusedWindow():spacesMoveTo(getAdjacentSpace())
+  moveFocusedWindowToSpaceAndFocusNextWindow(getAdjacentSpace())
 end)
 
 hs.hotkey.bind({ "alt", "ctrl", "shift" }, "h", function()
-  hs.window.focusedWindow():spacesMoveTo(getAdjacentSpace(true))
+  moveFocusedWindowToSpaceAndFocusNextWindow(getAdjacentSpace(true))
 end)
 
+function bindIndex(keyIndex)
+  hs.hotkey.bind({ "alt", "ctrl", "shift" }, tostring(keyIndex), function()
+    moveFocusedWindowToSpaceAndFocusNextWindow(getSpaceAtIndex(keyIndex))
+  end)
+
+  hs.hotkey.bind({ "cmd", "ctrl", "shift" }, tostring(keyIndex), function()
+    spaces.changeToSpace(getSpaceAtIndex(keyIndex))
+  end)
+end
+
+for i = 1, 8 do
+  bindIndex(i)
+end
+
 hs.hotkey.bind({ "cmd", "ctrl", "shift" }, "l", function()
-   spaces.changeToSpace(getAdjacentSpace())
+  spaces.changeToSpace(getAdjacentSpace())
 end)
 
 hs.hotkey.bind({ "cmd", "ctrl", "shift" }, "h", function()
-   spaces.changeToSpace(getAdjacentSpace(true))
+  spaces.changeToSpace(getAdjacentSpace(true))
 end)
+
+function moveFocusedWindowToSpaceAndFocusNextWindow(space)
+  local prevSpace = spaces.activeSpace()
+  hs.window.focusedWindow():spacesMoveTo(space)
+
+  local win = spaces.allWindowsForSpace(prevSpace)[1]
+  if win ~= nil then
+    win:focus()
+  end
+end
+
+function getSpacesForCurrentScreen()
+  local space = spaces.activeSpace()
+  local screenUUID = spaces.spaceScreenUUID(space)
+  return spaces.layout()[screenUUID]
+end
+
+function getSpaceAtIndex(index)
+  local spacesForScreen = getSpacesForCurrentScreen()
+  if index > #spacesForScreen then
+    return spacesForScreen[#spacesForScreen]
+  else
+    return spacesForScreen[index]
+  end
+end
 
 function getAdjacentSpace(backwards)
   local space = spaces.activeSpace()
-  local screenUUID = spaces.spaceScreenUUID(space)
-  local spacesForScreen = spaces.layout()[screenUUID]
+  local spacesForScreen = getSpacesForCurrentScreen()
 
   local startIndex
   local endIndex
