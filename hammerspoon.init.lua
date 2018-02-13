@@ -174,7 +174,10 @@ function getSpacesForCurrentScreen()
   return spaces.layout()[screenUUID]
 end
 
-function getSpaceAtIndex(index)
+function getSpaceAtIndex(inputIndex)
+  -- skip first space since it's used by mac
+  local index = inputIndex + 1
+
   local spacesForScreen = getSpacesForCurrentScreen()
   if index > #spacesForScreen then
     return spacesForScreen[#spacesForScreen]
@@ -191,12 +194,13 @@ function getAdjacentSpace(backwards)
   local endIndex
   local iterator
 
+  -- skip first space since it's used by mac
   if backwards then
     startIndex = #spacesForScreen
-    endIndex = 1
+    endIndex = 2
     iterator = -1
   else
-    startIndex = 1
+    startIndex = 2
     endIndex = #spacesForScreen
     iterator = 1
   end
