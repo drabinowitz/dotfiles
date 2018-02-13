@@ -142,7 +142,7 @@ function bindIndex(keyIndex)
   end)
 
   hs.hotkey.bind({ "cmd", "ctrl", "shift" }, tostring(keyIndex), function()
-    spaces.changeToSpace(getSpaceAtIndex(keyIndex))
+    navigateToSpace(getSpaceAtIndex(keyIndex))
   end)
 end
 
@@ -151,11 +151,11 @@ for i = 1, 8 do
 end
 
 hs.hotkey.bind({ "cmd", "ctrl", "shift" }, "l", function()
-  spaces.changeToSpace(getAdjacentSpace())
+  navigateToSpace(getAdjacentSpace())
 end)
 
 hs.hotkey.bind({ "cmd", "ctrl", "shift" }, "h", function()
-  spaces.changeToSpace(getAdjacentSpace(true))
+  navigateToSpace(getAdjacentSpace(true))
 end)
 
 function moveFocusedWindowToSpaceAndFocusNextWindow(space)
@@ -168,10 +168,25 @@ function moveFocusedWindowToSpaceAndFocusNextWindow(space)
   end
 end
 
+function navigateToSpace(space)
+  spaces.changeToSpace(space)
+end
+
 function getAvailableSpaces()
-  local space = spaces.activeSpace()
-  local screenUUID = spaces.spaceScreenUUID(space)
-  return spaces.layout()[screenUUID]
+  local availableSpaces = {}
+  local allScreens = hs.screen.allScreens()
+  local spacesByScreen = spaces.layout()
+
+  for i = 1, #allScreens do
+    local screenSpacesUUID = allScreens[i]:spacesUUID()
+    local spacesForScreen = spacesByScreen[screenSpacesUUID]
+
+    for j = 1, #spacesForScreen do
+      table.insert(availableSpaces, spacesForScreen[j])
+    end
+  end
+
+  return availableSpaces
 end
 
 function getSpaceAtIndex(inputIndex)
