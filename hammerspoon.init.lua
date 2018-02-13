@@ -168,7 +168,7 @@ function moveFocusedWindowToSpaceAndFocusNextWindow(space)
   end
 end
 
-function getSpacesForCurrentScreen()
+function getAvailableSpaces()
   local space = spaces.activeSpace()
   local screenUUID = spaces.spaceScreenUUID(space)
   return spaces.layout()[screenUUID]
@@ -178,17 +178,17 @@ function getSpaceAtIndex(inputIndex)
   -- skip first space since it's used by mac
   local index = inputIndex + 1
 
-  local spacesForScreen = getSpacesForCurrentScreen()
-  if index > #spacesForScreen then
-    return spacesForScreen[#spacesForScreen]
+  local availableSpaces = getAvailableSpaces()
+  if index > #availableSpaces then
+    return availableSpaces[#availableSpaces]
   else
-    return spacesForScreen[index]
+    return availableSpaces[index]
   end
 end
 
 function getAdjacentSpace(backwards)
   local space = spaces.activeSpace()
-  local spacesForScreen = getSpacesForCurrentScreen()
+  local availableSpaces = getAvailableSpaces()
 
   local startIndex
   local endIndex
@@ -196,19 +196,19 @@ function getAdjacentSpace(backwards)
 
   -- skip first space since it's used by mac
   if backwards then
-    startIndex = #spacesForScreen
+    startIndex = #availableSpaces
     endIndex = 2
     iterator = -1
   else
     startIndex = 2
-    endIndex = #spacesForScreen
+    endIndex = #availableSpaces
     iterator = 1
   end
 
   local hasFoundSpace = false
 
   for spaceIndex = startIndex, endIndex, iterator do
-    local currentSpace = spacesForScreen[spaceIndex]
+    local currentSpace = availableSpaces[spaceIndex]
 
      if hasFoundSpace then
        return currentSpace
@@ -217,5 +217,5 @@ function getAdjacentSpace(backwards)
      end
    end
 
-   return spacesForScreen[startIndex]
+   return availableSpaces[startIndex]
 end
