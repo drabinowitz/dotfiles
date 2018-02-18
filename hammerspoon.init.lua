@@ -267,9 +267,49 @@ function getSpaceFromNavKey(navKey)
     return availableSpaces[map[navKey]]
 end
 
+function getScreenFromUUID(screenUUID)
+   local allScreens = hs.screen.allScreens()
+   for i = 1, #allScreens do
+      local screen = allScreens[i]
+      if screen:spacesUUID() == screenUUID then
+         return screen
+      end
+   end
+end
+
 function bindSpaceNavKey(i)
    hs.hotkey.bind({ "cmd", "ctrl" }, spaceKeys[i], function()
       local availableSpaces = getAvailableSpaces()
+      local targetSpace = getSpaceFromNavKey(spaceKeys[i])
+      local targetScreenUUID = spaces.spaceScreenUUID(targetSpace)
+
+      if targetScreenUUID ~= spaces.spaceScreenUUID(spaces.activeSpace()) then
+        local screen = getScreenFromUUID(targetScreenUUID)
+
+        if screen == nil then
+            print("ERROR: no matching screen found for", spaceKeys[i], targetSpace, targetScreenUUID)
+            return
+        end
+
+        local windows = hs.window.filter.default:getWindows()
+        local focusTargetWindow
+
+        for i = 1, #windows do
+            local window = windows[i]
+            if window:screen() == screen then
+                focusTargetWindow = window
+                break
+            end
+        end
+
+        if focusTargetWindow == nil then
+            print("ERROR: no matching window found for", spaceKeys[i], targetSpace, targetScreenUUID, screen)
+            return
+        end
+
+        focusTargetWindow:focus()
+      end
+
       navigateToSpace(getSpaceFromNavKey(spaceKeys[i]))
    end)
 
