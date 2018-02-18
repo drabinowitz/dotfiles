@@ -234,3 +234,36 @@ function getAdjacentSpace(backwards)
 
    return availableSpaces[startIndex]
 end
+
+local spaceKeys = { "u", "i", "o", "p", "n", "m", ",", "." }
+
+local keyToSingleScreenSpaceMap = {}
+keyToSingleScreenSpaceMap["u"] = 2
+keyToSingleScreenSpaceMap["i"] = 3
+keyToSingleScreenSpaceMap["o"] = 4
+keyToSingleScreenSpaceMap["p"] = 5
+keyToSingleScreenSpaceMap["n"] = 1
+keyToSingleScreenSpaceMap["m"] = 6
+keyToSingleScreenSpaceMap[","] = 7
+keyToSingleScreenSpaceMap["."] = 8
+
+function getSpaceFromNavKey(navKey)
+    local availableSpaces = getAvailableSpaces()
+    return availableSpaces[keyToSingleScreenSpaceMap[navKey]]
+end
+
+function bindSpaceNavKey(i)
+   hs.hotkey.bind({ "cmd", "ctrl" }, spaceKeys[i], function()
+      local availableSpaces = getAvailableSpaces()
+      navigateToSpace(getSpaceFromNavKey(spaceKeys[i]))
+   end)
+
+   hs.hotkey.bind({ "alt", "ctrl" }, spaceKeys[i], function()
+      local availableSpaces = getAvailableSpaces()
+      moveFocusedWindowToSpaceAndFocusNextWindow(getSpaceFromNavKey(spaceKeys[i]))
+   end)
+end
+
+for i = 1, #spaceKeys do
+   bindSpaceNavKey(i)
+end
