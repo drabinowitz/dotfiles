@@ -247,9 +247,24 @@ keyToSingleScreenSpaceMap["m"] = 6
 keyToSingleScreenSpaceMap[","] = 7
 keyToSingleScreenSpaceMap["."] = 8
 
+local keyToMultiScreenSpaceMap = {}
+keyToMultiScreenSpaceMap["u"] = 2
+keyToMultiScreenSpaceMap["i"] = 3
+keyToMultiScreenSpaceMap["o"] = 4
+keyToMultiScreenSpaceMap["p"] = 5
+keyToMultiScreenSpaceMap["n"] = 6
+keyToMultiScreenSpaceMap["m"] = 7
+keyToMultiScreenSpaceMap[","] = 8
+keyToMultiScreenSpaceMap["."] = 9
+
+function isMultiScreen()
+   return #hs.screen.allScreens() > 1
+end
+
 function getSpaceFromNavKey(navKey)
     local availableSpaces = getAvailableSpaces()
-    return availableSpaces[keyToSingleScreenSpaceMap[navKey]]
+    local map = isMultiScreen() and keyToMultiScreenSpaceMap or keyToSingleScreenSpaceMap
+    return availableSpaces[map[navKey]]
 end
 
 function bindSpaceNavKey(i)
