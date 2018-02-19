@@ -302,12 +302,9 @@ function bindSpaceNavKey(i)
             end
         end
 
-        if focusTargetWindow == nil then
-            print("ERROR: no matching window found for", spaceKeys[i], targetSpace, targetScreenUUID, screen)
-            return
+        if focusTargetWindow ~= nil then
+            focusTargetWindow:focus()
         end
-
-        focusTargetWindow:focus()
       end
 
       navigateToSpace(getSpaceFromNavKey(spaceKeys[i]))
