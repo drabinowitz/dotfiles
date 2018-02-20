@@ -305,6 +305,10 @@ function bindSpaceNavKey(i)
         if focusTargetWindow ~= nil then
             focusTargetWindow:focus()
         end
+
+        if spaces.activeSpace() == targetSpace then
+           return
+        end
       end
 
       navigateToSpace(getSpaceFromNavKey(spaceKeys[i]))
