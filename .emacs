@@ -236,9 +236,11 @@ See URL `http://flowtype.org/'."
 (ac-config-default)
 (setq-default indent-tabs-mode nil)
 (define-key text-mode-map (kbd "<tab>") 'tab-to-tab-stop)
-(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
-                      64 68 72 76 80 84 88 92 96 100 104 108 112
-                      116 120))
+(setq tab-stop-list '(2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32
+                        34 36 38 40 42 44 46 48 50 52 54 56 58 60
+                        62 64 66 68 70 72 74 76 78 80 82 84 86 88
+                        90 92 94 96 98 100 102 104 106 108 110 112
+                        114 116 118 120))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 (require 'tss)
@@ -438,11 +440,15 @@ See URL `http://flowtype.org/'."
  '(flycheck-indication-mode (quote left-fringe))
  '(flycheck-javascript-flow-args (quote ("--respect-pragma")))
  '(global-flycheck-mode t)
+ '(js-indent-level 2)
  '(js2-mode-show-parse-errors nil)
  '(package-selected-packages
    (quote
     (lua-mode rjsx-mode string-inflection tss typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
- '(sgml-basic-offset 4)
+ '(sgml-basic-offset 2)
+ '(tab-stop-list
+   (quote
+    (2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48 50 52 54 56 58 60 62 64 66 68 70 72 74 76 78 80)))
  '(tern-ac-on-dot t)
  '(tern-ac-sync t))
 (custom-set-faces
