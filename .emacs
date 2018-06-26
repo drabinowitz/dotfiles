@@ -229,7 +229,56 @@ See URL `http://flowtype.org/'."
 (evil-leader/set-key "c" 'magit-checkout)
 (evil-leader/set-key "b" 'magit-branch-and-checkout)
 (evil-leader/set-key "d" 'magit-branch-delete)
-(powerline-default-theme)
+
+  (setq-default mode-line-format
+        '("%e"
+          (:eval
+           (let* ((active (powerline-selected-window-active))
+                  (mode-line-buffer-id (if active 'mode-line-buffer-id 'mode-line-buffer-id-inactive))
+                  (mode-line (if active 'mode-line 'mode-line-inactive))
+                  (face0 (if active 'powerline-active0 'powerline-inactive0))
+                  (face1 (if active 'powerline-active1 'powerline-inactive1))
+                  (face2 (if active 'powerline-active2 'powerline-inactive2))
+                  (separator-left (intern (format "powerline-%s-%s"
+						  (powerline-current-separator)
+                                                  (car powerline-default-separator-dir))))
+                  (separator-right (intern (format "powerline-%s-%s"
+                                                   (powerline-current-separator)
+                                                   (cdr powerline-default-separator-dir))))
+                  (lhs (list (powerline-raw "%*" face0 'l)
+                             (powerline-buffer-id `(mode-line-buffer-id ,face0) 'l)
+			     (powerline-raw "%4l" face0 'l)
+			     (powerline-raw ":" face0 'l)
+			     (powerline-raw "%3c" face0 'r)
+			     (powerline-raw " " face0)
+			     (powerline-raw "%6p" face0 'r)
+                             (powerline-major-mode face1 'l)
+                             (powerline-process face1)
+                             (powerline-minor-modes face1 'l)
+                             (powerline-narrow face1 'l)
+                             (powerline-raw " " face1)
+                             (funcall separator-left face1 face2)
+                             (powerline-vc face2 'r)
+                             (when (bound-and-true-p nyan-mode)
+                               (powerline-raw (list (nyan-create)) face2 'l))))
+                  (rhs (list (powerline-raw global-mode-string face2 'r)
+                             (funcall separator-right face2 face1)
+			     (unless window-system
+			       (powerline-raw (char-to-string #xe0a1) face1 'l))
+			     (powerline-raw "%4l" face1 'l)
+			     (powerline-raw ":" face1 'l)
+			     (powerline-raw "%3c" face1 'r)
+			     (funcall separator-right face1 face0)
+			     (powerline-raw " " face0)
+			     (powerline-raw "%6p" face0 'r)
+                             (when powerline-display-hud
+                               (powerline-hud face0 face2))
+			     (powerline-fill face0 0)
+			     )))
+	     (concat (powerline-render lhs)
+		     (powerline-fill face2 (powerline-width rhs))
+		     (powerline-render rhs))))))
+
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key global-map (kbd "RET") 'newline-and-indent)
@@ -445,6 +494,9 @@ See URL `http://flowtype.org/'."
  '(package-selected-packages
    (quote
     (yaml-mode terraform-mode lua-mode rjsx-mode string-inflection tss typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
+ '(powerline-buffer-size-suffix nil)
+ '(powerline-default-separator nil)
+ '(powerline-display-buffer-size nil)
  '(sgml-basic-offset 2)
  '(tab-stop-list
    (quote
@@ -460,4 +512,6 @@ See URL `http://flowtype.org/'."
  '(avy-lead-face-1 ((t (:background "color-55" :foreground "white"))))
  '(avy-lead-face-2 ((t (:background "color-57" :foreground "white"))))
  '(js2-function-call ((t (:inherit default :foreground "color-110"))))
- '(js2-object-property ((t (:inherit default :foreground "color-109")))))
+ '(js2-object-property ((t (:inherit default :foreground "color-109"))))
+ '(mode-line-inactive ((t (:inherit mode-line :background "white" :foreground "brightblack" :inverse-video t :box nil :underline nil :slant normal :weight normal))))
+ '(powerline-inactive0 ((t (:inherit mode-line-inactive)))))
