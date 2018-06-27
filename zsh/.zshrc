@@ -12,6 +12,9 @@ fi
 
 # Customize to your needs...
 
+export FZF_TMUX=1
+export FZF_TMUX_HEIGHT=50%
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
