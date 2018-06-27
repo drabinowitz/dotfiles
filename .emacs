@@ -378,9 +378,11 @@ See URL `http://flowtype.org/'."
     ;;((eq overriding-terminal-local-map evil-read-key-map) (keyboard-quit) (kbd ""))
     (t (kbd "C-g"))))
 (define-key key-translation-map (kbd "C-c") 'my-esc)
+(define-key key-translation-map (kbd "C-m") 'my-esc)
 ;; Works around the fact that Evil uses read-event directly when in operator state, which
 ;; doesn't use the key-translation-map.
 (define-key evil-operator-state-map (kbd "C-c") 'keyboard-quit)
+(define-key evil-operator-state-map (kbd "C-m") 'keyboard-quit)
 
 ;; change mode-line color by evil state
    (lexical-let ((default-color (cons (face-background 'mode-line)
