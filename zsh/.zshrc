@@ -14,6 +14,7 @@ fi
 
 export FZF_TMUX=1
 export FZF_TMUX_HEIGHT=50%
+export KEYTIMEOUT=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
