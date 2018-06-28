@@ -133,8 +133,10 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'powerlevel9k'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vi_mode root_indicator)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status root_indicator vi_mode dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+POWERLEVEL9K_VI_INSERT_MODE_STRING="[I]"
+POWERLEVEL9K_VI_COMMAND_MODE_STRING="[N]"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_SHORTEN_DELIMITER=""
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
