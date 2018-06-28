@@ -13,5 +13,6 @@ fi
 # Customize to your needs...
 
 bindkey -M viins "^m" vi-cmd-mode
+bindkey -M viins "^M" accept-line
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
