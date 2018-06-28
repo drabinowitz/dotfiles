@@ -138,6 +138,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vi_mode status root_indicator background_job
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_SHORTEN_DELIMITER=""
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+POWERLEVEL9K_VCS_SHOW_SUBMODULE_DIRTY=false
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
