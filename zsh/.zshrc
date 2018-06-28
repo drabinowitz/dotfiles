@@ -14,5 +14,6 @@ fi
 
 bindkey -M viins "^m" vi-cmd-mode
 bindkey -M viins "^M" accept-line
+bindkey -M viins "^x" vi-add-eol
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
