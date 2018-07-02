@@ -18,7 +18,7 @@ fi
 export FZF_TMUX=1
 export FZF_TMUX_HEIGHT=50%
 export KEYTIMEOUT=1
-export JAVA_HOME=/usr/libexec/java_home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:${ZDOTDIR:-$HOME}/Library/Android/sdk/platform-tools"
 export SP_REPO_PATH="${ZDOTDIR:-$HOME}/gitrep"
