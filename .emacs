@@ -186,8 +186,23 @@
     '(javascript-jshint)))
 (add-hook 'javascript-mode-hook 'flycheck-mode)
 (add-hook 'rjsx-mode-hook 'flycheck-mode)
+(add-hook 'rjsx-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook #'eslint-fix-file-and-revert)))
+
+(defun my/use-eslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (eslint (and root
+                      (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                        root))))
+    (when (and eslint (file-executable-p eslint))
+      (setq-local flycheck-javascript-eslint-executable eslint))))
+
+(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+
 (with-eval-after-load 'flycheck
-    (flycheck-add-mode 'javascript-eslint 'rjsx-mode)
     (flycheck-add-mode 'javascript-flow 'rjsx-mode)
     (flycheck-add-mode 'typescript 'typescript-mode)
     (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
@@ -330,7 +345,14 @@
 (defun eslint-fix-file ()
   (interactive)
   (message "eslint --fixing the file" (buffer-file-name))
-  (shell-command (concat "eslint --fix " (buffer-file-name))))
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (eslint (and root
+                      (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                        root))))
+    (when (and eslint (file-executable-p eslint))
+      (shell-command (concat eslint " --fix " (buffer-file-name))))))
 
 (defun eslint-fix-file-and-revert ()
   (interactive)
