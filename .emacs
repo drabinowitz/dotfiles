@@ -350,9 +350,12 @@
                 "node_modules"))
          (eslint (and root
                       (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                        root)))
+         (prettier (and root
+                      (expand-file-name "node_modules/prettier/bin-prettier.js"
                                         root))))
-    (when (and eslint (file-executable-p eslint))
-      (shell-command (concat eslint " --fix " (buffer-file-name))))))
+    (when (and (and eslint (file-executable-p eslint)) (and prettier (file-executable-p prettier)))
+      (shell-command (concat "PRETTIED=$(" prettier " " (buffer-file-name) "); echo $PRETTIED | " eslint " --stdin --stdin-filename='" (buffer-file-name) "' --fix-dry-run --format=json | NODE_P=$PRETTIED node -p \"JSON.parse(fs.readFileSync('/dev/stdin','utf-8'))[0].output || process.env.NODE_P\" > " (buffer-file-name))))))
 
 (defun eslint-fix-file-and-revert ()
   (interactive)
