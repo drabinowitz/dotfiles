@@ -160,7 +160,15 @@ end)
 
 function moveFocusedWindowToSpaceAndFocusNextWindow(space)
   local prevSpace = spaces.activeSpace()
-  hs.window.focusedWindow():spacesMoveTo(space)
+  local window = hs.window.focusedWindow()
+
+  window:spacesMoveTo(space)
+
+  local targetScreenUUID = spaces.spaceScreenUUID(space)
+  local screen = getScreenFromUUID(targetScreenUUID)
+  if (window:screen() ~= screen) then
+    window:moveToScreen(screen)
+  end
 
   local win = spaces.allWindowsForSpace(prevSpace)[1]
   if win ~= nil then
