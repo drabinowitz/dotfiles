@@ -168,6 +168,7 @@ function moveFocusedWindowToSpaceAndFocusNextWindow(space)
   local screen = getScreenFromUUID(targetScreenUUID)
   if (window:screen() ~= screen) then
     window:moveToScreen(screen)
+    window:moveToUnit(hs.layout.maximized)
   end
 
   local win = spaces.allWindowsForSpace(prevSpace)[1]
