@@ -188,7 +188,7 @@
 (add-hook 'rjsx-mode-hook 'flycheck-mode)
 (add-hook 'rjsx-mode-hook
           (lambda ()
-            (add-hook 'after-save-hook #'eslint-fix-file-and-revert)))
+            (add-hook 'after-save-hook #'eslint-fix-file-and-revert nil 'make-it-local)))
 
 (defun my/use-eslint-from-node-modules ()
   (let* ((root (locate-dominating-file
@@ -354,7 +354,7 @@
          (prettier (and root
                       (expand-file-name "node_modules/prettier/bin-prettier.js"
                                         root))))
-    (when (and (not (string-suffix-p "_EDITMSG" (buffer-file-name))) (and (and eslint (file-executable-p eslint)) (and prettier (file-executable-p prettier))))
+    (when (and (and eslint (file-executable-p eslint)) (and prettier (file-executable-p prettier)))
       (shell-command (concat "PRETTIED=$(" prettier " " (buffer-file-name) "); echo $PRETTIED | " eslint " --stdin --stdin-filename='" (buffer-file-name) "' --fix-dry-run --format=json | NODE_P=$PRETTIED node -p \"JSON.parse(fs.readFileSync('/dev/stdin','utf-8'))[0].output || process.env.NODE_P\" > " (buffer-file-name))))))
 
 (defun eslint-fix-file-and-revert ()
