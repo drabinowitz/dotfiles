@@ -288,7 +288,6 @@ end
 
 function bindSpaceNavKey(i)
    hs.hotkey.bind({ "cmd", "ctrl" }, spaceKeys[i], function()
-      local availableSpaces = getAvailableSpaces()
       local targetSpace = getSpaceFromNavKey(spaceKeys[i])
       local targetScreenUUID = spaces.spaceScreenUUID(targetSpace)
 
@@ -324,7 +323,6 @@ function bindSpaceNavKey(i)
    end)
 
    hs.hotkey.bind({ "alt", "ctrl" }, spaceKeys[i], function()
-      local availableSpaces = getAvailableSpaces()
       moveFocusedWindowToSpaceAndFocusNextWindow(getSpaceFromNavKey(spaceKeys[i]))
    end)
 end
