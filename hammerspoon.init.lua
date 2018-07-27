@@ -291,39 +291,55 @@ function bindSpaceNavKey(i)
       local targetSpace = getSpaceFromNavKey(spaceKeys[i])
       local targetScreenUUID = spaces.spaceScreenUUID(targetSpace)
 
-      if targetScreenUUID ~= spaces.spaceScreenUUID(spaces.activeSpace()) then
-        local screen = getScreenFromUUID(targetScreenUUID)
+      local focusTargetWindow
 
-        if screen == nil then
+      if targetScreenUUID ~= spaces.spaceScreenUUID(spaces.activeSpace()) then
+         local screen = getScreenFromUUID(targetScreenUUID)
+
+         if screen == nil then
             print("ERROR: no matching screen found for", spaceKeys[i], targetSpace, targetScreenUUID)
             return
-        end
+         end
 
-        local windows = hs.window.filter.default:getWindows()
-        local focusTargetWindow
+         local windows = hs.window.filter.default:getWindows()
 
-        for i = 1, #windows do
+         for i = 1, #windows do
             local window = windows[i]
             if window:screen() == screen then
-                focusTargetWindow = window
-                break
+               local spaces = window:spaces()
+               for j = 1, #spaces do
+                  if spaces[j] == targetSpace then
+                     focusTargetWindow = window
+                     break
+                  end
+               end
             end
-        end
+         end
 
-        if focusTargetWindow ~= nil then
+         if focusTargetWindow ~= nil then
             focusTargetWindow:focus()
-        end
+         end
 
-        if spaces.activeSpace() == targetSpace then
-           return
-        end
+         if spaces.activeSpace() == targetSpace then
+            return
+         end
       end
 
       navigateToSpace(getSpaceFromNavKey(spaceKeys[i]))
+
+      forceRefocusToFightChromeNavigation(focusTargetWindow)
    end)
 
    hs.hotkey.bind({ "alt", "ctrl" }, spaceKeys[i], function()
       moveFocusedWindowToSpaceAndFocusNextWindow(getSpaceFromNavKey(spaceKeys[i]))
+   end)
+end
+
+function forceRefocusToFightChromeNavigation(focusTargetWindow)
+   hs.timer.doAfter(.005, function()
+      if focusTargetWindow ~= nil and focusTargetWindow ~= hs.window.focusedWindow() then
+         focusTargetWindow:focus()
+      end
    end)
 end
 
