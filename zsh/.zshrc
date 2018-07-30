@@ -17,3 +17,13 @@ bindkey -M viins "^n" vi-cmd-mode
 bindkey -M viins "^x" vi-add-eol
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [[ -s ~/ssh-find-agent.sh ]]; then
+  . ~/ssh-find-agent.sh
+  ssh-find-agent -a
+
+  if [[ -z "$SSH_AUTH_SOCK" ]]; then
+    eval $(ssh-agent) > /dev/null
+    ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
+  fi
+fi
