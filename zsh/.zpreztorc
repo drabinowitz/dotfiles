@@ -38,8 +38,7 @@ zstyle ':prezto:load' pmodule \
   'syntax-highlighting' \
   'prompt' \
   'autosuggestions' \
-  'history-substring-search' \
-  'ssh'
+  'history-substring-search'
 
 #
 # Highlighting LOAD FIRST
@@ -184,7 +183,7 @@ POWERLEVEL9K_VCS_SHOW_SUBMODULE_DIRTY=false
 #
 
 # Set the SSH identities to load into the agent.
-zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
+# zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
 
 #
 # Syntax Highlighting
