@@ -27,3 +27,4 @@ if [[ -s ~/ssh-find-agent.sh ]]; then
     ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
   fi
 fi
+export PATH="/usr/local/opt/node@8/bin:$PATH"
