@@ -213,6 +213,8 @@
                     :foreground "yellow"
                     :background "red")
 
+(add-hook 'after-init-hook 'global-company-mode)
+
 (evilem-default-keybindings "SPC")
 (evilem-define (kbd "SPC w") 'evil-forward-word-begin)
 (evilem-define (kbd "SPC e") 'evil-forward-word-end)
@@ -374,28 +376,29 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-ignore-case nil)
- '(custom-enabled-themes (quote (darcula)))
+ '(company-backends
+   '(company-flow company-eclim company-semantic company-clang company-xcode company-cmake company-capf company-files
+                  (company-dabbrev-code company-gtags company-etags company-keywords)
+                  company-oddmuse company-dabbrev))
+ '(custom-enabled-themes '(darcula))
  '(custom-safe-themes
-   (quote
-    ("3d5720f488f2ed54dd4e40e9252da2912110948366a16aef503f3e9e7dfe4915" "fad38808e844f1423c68a1888db75adf6586390f5295a03823fa1f4959046f81" "c697b65591ba1fdda42fae093563867a95046466285459bd4e686dc95a819310" default)))
+   '("3d5720f488f2ed54dd4e40e9252da2912110948366a16aef503f3e9e7dfe4915" "fad38808e844f1423c68a1888db75adf6586390f5295a03823fa1f4959046f81" "c697b65591ba1fdda42fae093563867a95046466285459bd4e686dc95a819310" default))
  '(evil-magit-use-y-for-yank t)
  '(evil-shift-width 2)
- '(evilem-style (quote at-full))
+ '(evilem-style 'at-full)
  '(flycheck-eslintrc "./.eslintrc")
- '(flycheck-highlighting-mode (quote symbols))
- '(flycheck-indication-mode (quote left-fringe))
- '(flycheck-javascript-flow-args (quote ("--respect-pragma")))
+ '(flycheck-highlighting-mode 'symbols)
+ '(flycheck-indication-mode 'left-fringe)
+ '(flycheck-javascript-flow-args '("--respect-pragma"))
  '(global-flycheck-mode t)
  '(js-indent-level 2)
  '(js2-mode-show-parse-errors nil)
  '(package-selected-packages
-   (quote
-    (keychain-environment lua-mode rjsx-mode string-inflection tss typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate)))
+   '(company-flow company keychain-environment lua-mode rjsx-mode string-inflection tss typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))
  '(sgml-basic-offset 2)
  '(standard-indent 2)
  '(tab-stop-list
-   (quote
-    (2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48 50 52 54 56 58 60 62 64 66 68 70 72 74 76 78 80)))
+   '(2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48 50 52 54 56 58 60 62 64 66 68 70 72 74 76 78 80))
  '(tern-ac-on-dot t)
  '(tern-ac-sync t))
 (custom-set-faces
