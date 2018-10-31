@@ -195,9 +195,6 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
-
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -228,6 +225,10 @@
 
 (add-hook 'typescript-mode-hook 'flycheck-mode)
 (add-hook 'typescript-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook #'tslint-fix-file-and-revert nil 'make-it-local)))
+
+(add-hook 'web-mode-hook
           (lambda ()
             (add-hook 'after-save-hook #'tslint-fix-file-and-revert nil 'make-it-local)))
 
@@ -411,13 +412,16 @@
                 (or (buffer-file-name) default-directory)
                 "node_modules"))
          (tslint (and root
-                      (expand-file-name "node_modules/tslint/bin/tslint.js"
+                      (expand-file-name "node_modules/tslint/bin/tslint"
+                                        root)))
+         (tslint-config (and root
+                      (expand-file-name "tsconfig.json"
                                         root)))
          (prettier (and root
                       (expand-file-name "node_modules/prettier/bin-prettier.js"
                                         root))))
     (when (and (and tslint (file-executable-p tslint)) (and prettier (file-executable-p prettier)))
-      (shell-command (concat "PRETTIED=$(" prettier " " (buffer-file-name) "); echo $PRETTIED | " tslint " --stdin --stdin-filename='" (buffer-file-name) "' --fix-dry-run --format=json | NODE_P=$PRETTIED node -p \"JSON.parse(fs.readFileSync('/dev/stdin','utf-8'))[0].output || process.env.NODE_P\" > " (buffer-file-name))))))
+      (shell-command (concat prettier " --parser typescript --write " (buffer-file-name) " && " tslint " --out /dev/null --fix " (buffer-file-name))))))
 
 (defun tslint-fix-file-and-revert ()
   (interactive)
