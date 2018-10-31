@@ -36,6 +36,7 @@
 (require 'org)
 (require 'magit)
 (require 'typescript)
+(require 'web-mode)
 
 (require 'column-marker)
 (add-hook 'js-mode-hook (lambda () (interactive) (column-marker-1 81)))
@@ -161,20 +162,43 @@
                         114 116 118 120))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+;; enable typescript-tslint checker
+(flycheck-add-mode 'typescript-tslint 'web-mode)
 (require 'tss)
 (tss-config-default)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
 (autoload 'jsx-mode "jsx-mode" "JSX mode" t)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
-(flycheck-define-checker typescript
-  "A TypeScript syntax checker using tsc command."
-  :command ("tsc" "--strict" "--out" "/dev/null" source)
-  :error-patterns
-  ((error line-start (file-name) "(" line "," column "): error " (message) line-end))
-  :modes (typescript-mode))
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
 
-(add-to-list 'flycheck-checkers 'typescript)
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -202,9 +226,25 @@
 
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
+(add-hook 'typescript-mode-hook 'flycheck-mode)
+(add-hook 'typescript-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook #'tslint-fix-file-and-revert nil 'make-it-local)))
+
+(defun my/use-tslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (tslint (and root
+                      (expand-file-name "node_modules/tslint/bin/tslint.js"
+                                        root))))
+    (when (and tslint (file-executable-p tslint))
+      (setq-local flycheck-typescript-tslint-executable tslint))))
+
+(add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
+
 (with-eval-after-load 'flycheck
     (flycheck-add-mode 'javascript-flow 'rjsx-mode)
-    (flycheck-add-mode 'typescript 'typescript-mode)
     (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
 (set-face-attribute 'flycheck-warning nil
                     :foreground "yellow"
@@ -364,6 +404,26 @@
   (eslint-fix-file)
   (revert-buffer t t))
 
+(defun tslint-fix-file ()
+  (interactive)
+  (message "tslint --fixing the file" (buffer-file-name))
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (tslint (and root
+                      (expand-file-name "node_modules/tslint/bin/tslint.js"
+                                        root)))
+         (prettier (and root
+                      (expand-file-name "node_modules/prettier/bin-prettier.js"
+                                        root))))
+    (when (and (and tslint (file-executable-p tslint)) (and prettier (file-executable-p prettier)))
+      (shell-command (concat "PRETTIED=$(" prettier " " (buffer-file-name) "); echo $PRETTIED | " tslint " --stdin --stdin-filename='" (buffer-file-name) "' --fix-dry-run --format=json | NODE_P=$PRETTIED node -p \"JSON.parse(fs.readFileSync('/dev/stdin','utf-8'))[0].output || process.env.NODE_P\" > " (buffer-file-name))))))
+
+(defun tslint-fix-file-and-revert ()
+  (interactive)
+  (tslint-fix-file)
+  (revert-buffer t t))
+
 (evil-leader/set-key "f" 'eslint-fix-file-and-revert)
 
 (advice-add 'split-window-right :after #'balance-windows)
@@ -394,7 +454,7 @@
  '(js-indent-level 2)
  '(js2-mode-show-parse-errors nil)
  '(package-selected-packages
-   '(company-flow company keychain-environment lua-mode rjsx-mode string-inflection tss typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))
+   '(web-mode tide company-flow company keychain-environment lua-mode rjsx-mode string-inflection tss typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))
  '(sgml-basic-offset 2)
  '(standard-indent 2)
  '(tab-stop-list
