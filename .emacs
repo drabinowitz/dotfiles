@@ -176,8 +176,6 @@
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 ;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
-(require 'tss)
-(tss-config-default)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
 (autoload 'jsx-mode "jsx-mode" "JSX mode" t)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -460,13 +458,16 @@
  '(js-indent-level 2)
  '(js2-mode-show-parse-errors nil)
  '(package-selected-packages
-   '(web-mode tide company-flow company keychain-environment lua-mode rjsx-mode string-inflection tss typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))
+   '(web-mode tide company-flow company keychain-environment lua-mode rjsx-mode string-inflection typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))
  '(sgml-basic-offset 2)
  '(standard-indent 2)
  '(tab-stop-list
    '(2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48 50 52 54 56 58 60 62 64 66 68 70 72 74 76 78 80))
  '(tern-ac-on-dot t)
  '(tern-ac-sync t)
+ '(tide-always-show-documentation t)
+ '(tide-completion-detailed t)
+ '(tide-jump-to-definition-reuse-window nil)
  '(web-mode-enable-auto-indentation t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
