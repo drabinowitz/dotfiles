@@ -35,7 +35,6 @@
 (require 'helm-ag)
 (require 'org)
 (require 'magit)
-(require 'typescript)
 (require 'web-mode)
 
 (require 'column-marker)
@@ -468,6 +467,7 @@
  '(tide-always-show-documentation t)
  '(tide-completion-detailed t)
  '(tide-jump-to-definition-reuse-window nil)
+ '(typescript-indent-level 2)
  '(web-mode-enable-auto-indentation t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
