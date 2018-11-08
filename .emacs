@@ -99,6 +99,7 @@
 (evil-leader/set-key "c" 'magit-checkout)
 (evil-leader/set-key "b" 'magit-branch-and-checkout)
 (evil-leader/set-key "d" 'magit-branch-delete)
+(evil-leader/set-key "t" 'tide-jump-to-definition)
 
   (setq-default mode-line-format
         '("%e"
@@ -289,9 +290,9 @@
 
 (load "elscreen" "ElScreen" t)
 (elscreen-start)
-(evil-leader/set-key "t" 'elscreen-create) ;creat tab
 (define-key evil-normal-state-map "gT" 'elscreen-previous) ;previous tab
 (define-key evil-normal-state-map "gt" 'elscreen-next) ;next tab
+(define-key evil-normal-state-map "gc" 'elscreen-create) ;next tab
 
 ;;; C-c as general purpose escape key sequence.
 ;;;
