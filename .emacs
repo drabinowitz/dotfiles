@@ -36,6 +36,7 @@
 (require 'org)
 (require 'magit)
 (require 'web-mode)
+(require 'evil-org)
 
 (require 'column-marker)
 (add-hook 'js-mode-hook (lambda () (interactive) (column-marker-1 81)))
