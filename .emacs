@@ -95,6 +95,7 @@
 (evil-leader/set-key "e" 'helm-my-buffers)
 (evil-leader/set-key "a" 'helm-do-ag-project-root)
 (evil-leader/set-key "r" 'tide-rename-symbol)
+(evil-leader/set-key "R" 'tide-references)
 (evil-leader/set-key "g" 'magit-status)
 (evil-leader/set-key "c" 'magit-checkout)
 (evil-leader/set-key "b" 'magit-branch-and-checkout)
