@@ -81,6 +81,11 @@
                          )
                          "*helm-my-buffers*")))
 
+(defun invalidate-and-helm-my-buffers()
+  (interactive)
+  (projectile-invalidate-cache())
+  (helm-my-buffers))
+
 (setq backup-directory-alist `(("." . "~/.saves")))
 (evil-mode 1)
 (require 'evil-magit)
@@ -93,6 +98,7 @@
 (evil-leader/set-leader ",")
 (color-theme-approximate-on)
 (evil-leader/set-key "e" 'helm-my-buffers)
+(evil-leader/set-key "E" 'invalidate-and-helm-my-buffers)
 (evil-leader/set-key "a" 'helm-do-ag-project-root)
 (evil-leader/set-key "r" 'tide-rename-symbol)
 (evil-leader/set-key "R" 'tide-references)
