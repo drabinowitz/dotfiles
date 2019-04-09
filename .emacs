@@ -406,7 +406,7 @@
                       (expand-file-name "node_modules/prettier/bin-prettier.js"
                                         root))))
     (when (and (and eslint (file-executable-p eslint)) (and prettier (file-executable-p prettier)))
-      (shell-command (concat "PRETTIED=$(" prettier " " (buffer-file-name) "); echo $PRETTIED | " eslint " --stdin --stdin-filename='" (buffer-file-name) "' --fix-dry-run --format=json | NODE_P=$PRETTIED node -p \"JSON.parse(fs.readFileSync('/dev/stdin','utf-8'))[0].output || process.env.NODE_P\" > " (buffer-file-name))))))
+      (shell-command (concat prettier " --write " (buffer-file-name) " && " eslint " --quiet -o /dev/null --fix " (buffer-file-name))))))
 
 (defun eslint-fix-file-and-revert ()
   (interactive)
@@ -441,6 +441,9 @@
 (advice-add 'split-window-right :after #'balance-windows)
 (advice-add 'split-window-below :after #'balance-windows)
 (advice-add 'evil-quit :after #'balance-windows)
+
+(setcar (memq 'source-inplace (flycheck-checker-get 'typescript-tslint 'command))
+        'source-original)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
