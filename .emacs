@@ -1,6 +1,5 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(package-initialize)
 
 (setq evil-want-C-u-scroll t)
 
@@ -30,7 +29,6 @@
 (require 'tern)
 (require 'tern-auto-complete)
 (require 'clean-aindent-mode)
-(require 'flycheck-flow)
 (require 'rainbow-delimiters)
 (require 'helm-ag)
 (require 'org)
@@ -183,7 +181,7 @@
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 ;; enable typescript-tslint checker
-(flycheck-add-mode 'typescript-tslint 'web-mode)
+(flycheck-add-mode 'javascript-eslint 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
 (autoload 'jsx-mode "jsx-mode" "JSX mode" t)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -198,7 +196,8 @@
   ;; company is an optional dependency. You have to
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
-  (company-mode +1))
+  (company-mode +1)
+  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint))
 
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
@@ -213,6 +212,9 @@
 (setq-default flycheck-disabled-checkers
   (append flycheck-disabled-checkers
     '(javascript-jshint)))
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+    '(typescript-tslint)))
 (add-hook 'javascript-mode-hook 'flycheck-mode)
 (add-hook 'rjsx-mode-hook 'flycheck-mode)
 (add-hook 'rjsx-mode-hook
@@ -234,27 +236,21 @@
 (add-hook 'typescript-mode-hook 'flycheck-mode)
 (add-hook 'typescript-mode-hook
           (lambda ()
-            (add-hook 'after-save-hook #'tslint-fix-file-and-revert nil 'make-it-local)))
+            (add-hook 'after-save-hook #'eslint-fix-file-and-revert nil 'make-it-local)))
 
 (add-hook 'web-mode-hook
           (lambda ()
-            (add-hook 'after-save-hook #'tslint-fix-file-and-revert nil 'make-it-local)))
-
-(defun my/use-tslint-from-node-modules ()
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (tslint (and root
-                      (expand-file-name "node_modules/tslint/bin/tslint.js"
-                                        root))))
-    (when (and tslint (file-executable-p tslint))
-      (setq-local flycheck-typescript-tslint-executable tslint))))
-
-(add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
+            (add-hook 'after-save-hook #'eslint-fix-file-and-revert nil 'make-it-local)))
 
 (with-eval-after-load 'flycheck
-    (flycheck-add-mode 'javascript-flow 'rjsx-mode)
-    (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
+    (flycheck-add-mode 'javascript-eslint 'web-mode))
+
+(with-eval-after-load 'flycheck
+    (flycheck-add-mode 'javascript-eslint 'typescript-mode))
+
+(with-eval-after-load 'flycheck
+    (flycheck-add-mode 'javascript-eslint 'tide-mode))
+
 (set-face-attribute 'flycheck-warning nil
                     :foreground "yellow"
                     :background "red")
@@ -406,34 +402,11 @@
                       (expand-file-name "node_modules/prettier/bin-prettier.js"
                                         root))))
     (when (and (and eslint (file-executable-p eslint)) (and prettier (file-executable-p prettier)))
-      (shell-command (concat prettier " --write " (buffer-file-name) " && " eslint " --quiet -o /dev/null --fix " (buffer-file-name))))))
+      (shell-command (concat prettier " --parser typescript --write " (buffer-file-name) " && " eslint " -o /dev/null --fix " (buffer-file-name))))))
 
 (defun eslint-fix-file-and-revert ()
   (interactive)
   (eslint-fix-file)
-  (revert-buffer t t))
-
-(defun tslint-fix-file ()
-  (interactive)
-  (message "tslint --fixing the file" (buffer-file-name))
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (tslint (and root
-                      (expand-file-name "node_modules/tslint/bin/tslint"
-                                        root)))
-         (tslint-config (and root
-                      (expand-file-name "tsconfig.json"
-                                        root)))
-         (prettier (and root
-                      (expand-file-name "node_modules/prettier/bin-prettier.js"
-                                        root))))
-    (when (and (and tslint (file-executable-p tslint)) (and prettier (file-executable-p prettier)))
-      (shell-command (concat prettier " --parser typescript --write " (buffer-file-name) " && " tslint " --out /dev/null --fix " (buffer-file-name))))))
-
-(defun tslint-fix-file-and-revert ()
-  (interactive)
-  (tslint-fix-file)
   (revert-buffer t t))
 
 (evil-leader/set-key "f" 'eslint-fix-file-and-revert)
@@ -441,9 +414,6 @@
 (advice-add 'split-window-right :after #'balance-windows)
 (advice-add 'split-window-below :after #'balance-windows)
 (advice-add 'evil-quit :after #'balance-windows)
-
-(setcar (memq 'source-inplace (flycheck-checker-get 'typescript-tslint 'command))
-        'source-original)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -461,15 +431,14 @@
  '(evil-magit-use-y-for-yank t)
  '(evil-shift-width 2)
  '(evilem-style 'at-full)
- '(flycheck-eslintrc "./.eslintrc")
+ '(flycheck-eslintrc "./.eslintrc.json")
  '(flycheck-highlighting-mode 'symbols)
  '(flycheck-indication-mode 'left-fringe)
- '(flycheck-javascript-flow-args '("--respect-pragma"))
  '(global-flycheck-mode t)
  '(js-indent-level 2)
  '(js2-mode-show-parse-errors nil)
  '(package-selected-packages
-   '(php-mode web-mode tide company-flow company keychain-environment lua-mode rjsx-mode string-inflection typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters flycheck-flow clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))
+   '(php-mode web-mode tide company-flow company keychain-environment lua-mode rjsx-mode string-inflection typescript-mode rust-mode evil-magit magit column-marker autopair helm-projectile projectile helm-ag darcula-theme rainbow-delimiters clean-aindent-mode tern-auto-complete js2-mode jsx-mode flycheck powerline discover-my-major evil-search-highlight-persist evil-mc evil-org evil-tabs helm evil-visualstar evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-mark-replace evil-leader evil-extra-operator evil-exchange evil-easymotion evil-args color-theme-approximate))
  '(sgml-basic-offset 2)
  '(standard-indent 2)
  '(tab-stop-list
