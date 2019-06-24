@@ -197,6 +197,7 @@
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
   (company-mode +1)
+  (flycheck-add-next-checker 'tsx-tide 'javascript-eslint)
   (flycheck-add-next-checker 'typescript-tide 'javascript-eslint))
 
 ;; aligns annotation to the right hand side
