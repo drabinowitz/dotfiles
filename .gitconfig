@@ -6,6 +6,7 @@
 [core]
 	editor = vim
 	excludesfile = /home/dmitri/.gitignore_global
+	autocrlf = input
 [alias]
   co = checkout
   cm = commit

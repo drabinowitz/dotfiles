@@ -106,6 +106,7 @@
 (evil-leader/set-key "d" 'magit-branch-delete)
 (evil-leader/set-key "t" 'tide-jump-to-definition)
 (evil-leader/set-key "T" 'tide-jump-back)
+(evil-leader/set-key "p" 'magit-push-current-to-upstream)
 
   (setq-default mode-line-format
         '("%e"
@@ -449,6 +450,7 @@
  '(tide-always-show-documentation t)
  '(tide-completion-detailed t)
  '(tide-jump-to-definition-reuse-window t)
+ '(tide-sync-request-timeout 5)
  '(typescript-indent-level 2)
  '(web-mode-enable-auto-indentation t))
 (custom-set-faces

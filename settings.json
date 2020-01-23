@@ -1,0 +1,199 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "vim.leader": ",",
+    "vim.easymotion": true,
+    "editor.hover.delay": 100,
+    "editor.formatOnSave": true,
+    "git.autofetch": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true,
+        "source.fixAll.eslint": true
+    },
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "eslint.alwaysShowStatus": true,
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+            "autoFix": true,
+            "language": "typescript"
+        },
+        {
+            "autoFix": true,
+            "language": "typescriptreact"
+        }
+    ],
+    "explorer.confirmDelete": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.quickSuggestionsDelay": 200,
+    "editor.formatOnSaveTimeout": 10000,
+    "files.watcherExclude": {
+        "**/dist-*/**": true,
+        "**/server/database/testData/**": true,
+        "**/server/database/vendorsAndProducts/**": true
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "git.suggestSmartCommit": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "u",
+                "s"
+            ],
+            "commands": [
+                "git.pushTo"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "u",
+                "l"
+            ],
+            "commands": [
+                "git.pullFrom"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "t"
+            ],
+            "commands": [
+                "editor.action.revealDefinition"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "m"
+            ],
+            "commands": [
+                "git.merge"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "s"
+            ],
+            "commands": [
+                "git.stage",
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "m"
+            ],
+            "commands": [
+                "git.stage",
+                "git.commitStaged"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "M"
+            ],
+            "commands": [
+                "git.stageAllTracked",
+                "git.commitStaged"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "commands": [
+                "git.deleteBranch"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "o"
+            ],
+            "commands": [
+                "git.checkout"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "r"
+            ],
+            "commands": [
+                "editor.action.rename"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "z"
+            ],
+            "commands": [
+                "workbench.action.terminal.new"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "e"
+            ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "a"
+            ],
+            "commands": [
+                "extension.advancedNewFile"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "v"
+            ],
+            "commands": [
+                "workbench.action.splitEditor"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "n",
+                "n"
+            ],
+            "commands": [
+                "fileutils.renameFile"
+            ],
+        },
+        {
+            "before": [
+                "<leader>",
+                "n",
+                "n"
+            ],
+            "commands": [
+                "fileutils.moveFile"
+            ],
+        }
+    ]
+}

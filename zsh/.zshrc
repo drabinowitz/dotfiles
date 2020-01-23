@@ -40,3 +40,13 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/dmitrirabinowitz/gitrep/SiteAppExtension/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/dmitrirabinowitz/gitrep/SiteAppExtension/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/dmitrirabinowitz/gitrep/SiteAppExtension/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/dmitrirabinowitz/gitrep/SiteAppExtension/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/dmitrirabinowitz/gitrep/SiteAppExtension/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/dmitrirabinowitz/gitrep/SiteAppExtension/node_modules/tabtab/.completions/slss.zsh
