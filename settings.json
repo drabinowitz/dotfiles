@@ -189,7 +189,7 @@
             "before": [
                 "<leader>",
                 "n",
-                "n"
+                "m"
             ],
             "commands": [
                 "fileutils.moveFile"
