@@ -2,7 +2,7 @@
 	ui = auto
 [user]
 	name = drabinowitz
-	email = dmitrirabinowitz+code@gmail.com
+	email = dmitrirabinowitz+development@gmail.com
 [core]
 	editor = vim
 	excludesfile = /home/dmitri/.gitignore_global
@@ -17,3 +17,7 @@
   dump = cat-file -p
 [rerere]
 	enabled = true
+[credential]
+	helper = osxkeychain
+[url "git@github.com:"]
+	insteadOf = https://github.com/

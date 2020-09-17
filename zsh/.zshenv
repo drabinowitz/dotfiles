@@ -21,8 +21,10 @@ export KEYTIMEOUT=1
 export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:${ZDOTDIR:-$HOME}/Library/Android/sdk/platform-tools"
+export PATH="$PATH:/usr/local/go/bin"
+export GOPATH=$HOME/go
+export PATH="$PATH:$GOPATH/bin"
 export SP_REPO_PATH="${ZDOTDIR:-$HOME}/gitrep"
-export GOPATH="${ZDOTDIR:-$HOME}/gopath/"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
