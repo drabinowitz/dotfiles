@@ -132,15 +132,15 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'powerlevel9k'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status root_indicator vi_mode dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-POWERLEVEL9K_VI_INSERT_MODE_STRING="[I]"
-POWERLEVEL9K_VI_COMMAND_MODE_STRING="[N]"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-POWERLEVEL9K_VCS_SHOW_SUBMODULE_DIRTY=false
+zstyle ':prezto:module:prompt' theme 'powerlevel10k'
+POWERLEVEL10K_LEFT_PROMPT_ELEMENTS=(status root_indicator vi_mode dir vcs)
+POWERLEVEL10K_RIGHT_PROMPT_ELEMENTS=()
+POWERLEVEL10K_VI_INSERT_MODE_STRING="[I]"
+POWERLEVEL10K_VI_COMMAND_MODE_STRING="[N]"
+POWERLEVEL10K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL10K_SHORTEN_DELIMITER=""
+POWERLEVEL10K_SHORTEN_STRATEGY="truncate_from_right"
+POWERLEVEL10K_VCS_SHOW_SUBMODULE_DIRTY=false
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
