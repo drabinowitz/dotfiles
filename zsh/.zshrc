@@ -43,7 +43,7 @@ export PATH="/usr/local/opt/node@8/bin:$PATH"
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/dmitrirabinowitz/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" > /dev/null  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # tabtab source for serverless package
@@ -59,3 +59,17 @@ export NVM_DIR="$HOME/.nvm"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH=/usr/local/mysql/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
+export GOPRIVATE="github.com/Klover-Fintech"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
+source <(kubectl completion zsh)
+
+export PATH=/Users/dmitrirabinowitz/istio-1.12.1/bin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/dmitrirabinowitz/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/dmitrirabinowitz/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/dmitrirabinowitz/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/dmitrirabinowitz/google-cloud-sdk/completion.zsh.inc'; fi
