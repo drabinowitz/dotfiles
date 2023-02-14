@@ -62,6 +62,8 @@ export PATH=/usr/local/mysql/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 export GOPRIVATE="github.com/Klover-Fintech"
 
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 source <(kubectl completion zsh)
