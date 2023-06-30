@@ -1,8 +1,6 @@
 hs.loadSpoon("ReloadConfiguration")
 spoon.ReloadConfiguration:start()
 
-spaces = require("hs._asm.undocumented.spaces")
-
 hs.window.animationDuration = 0
 
 hs.hotkey.bind({ "alt", "ctrl" }, "h", function()
@@ -159,35 +157,40 @@ hs.hotkey.bind({ "cmd", "ctrl", "shift" }, "h", function()
 end)
 
 function moveFocusedWindowToSpaceAndFocusNextWindow(space)
-  local prevSpace = spaces.activeSpace()
+  local prevSpace = hs.spaces.activeSpaceOnScreen()
+
   local window = hs.window.focusedWindow()
 
-  window:spacesMoveTo(space)
+  window:moveToUnit(hs.layout.maximized)
 
-  local targetScreenUUID = spaces.spaceScreenUUID(space)
-  local screen = getScreenFromUUID(targetScreenUUID)
-  if (window:screen() ~= screen) then
-    window:moveToScreen(screen)
-    window:moveToUnit(hs.layout.maximized)
-  end
+  hs.spaces.moveWindowToSpace(window:id(), space)
 
-  local win = spaces.allWindowsForSpace(prevSpace)[1]
+  --local targetScreenUUID = spaces.spaceScreenUUID(space)
+  --local screen = getScreenFromUUID(targetScreenUUID)
+  --if (window:screen() ~= screen) then
+  --  window:moveToScreen(screen)
+  --  window:moveToUnit(hs.layout.maximized)
+  --end
+
+  local win = windowFromIDs(hs.spaces.windowsForSpace(prevSpace))
   if win ~= nil then
     win:focus()
   end
 end
 
 function navigateToSpace(space)
-  spaces.changeToSpace(space)
+  hs.spaces.gotoSpace(space)
 end
 
 function getAvailableSpaces()
   local availableSpaces = {}
   local allScreens = hs.screen.allScreens()
-  local spacesByScreen = spaces.layout()
+  local spacesByScreen = hs.spaces.allSpaces()
+
+  print("spacesByScreen", spacesByScreen)
 
   for i = 1, #allScreens do
-    local screenSpacesUUID = allScreens[i]:spacesUUID()
+    local screenSpacesUUID = allScreens[i]:getUUID()
     local spacesForScreen = spacesByScreen[screenSpacesUUID]
 
     for j = 1, #spacesForScreen do
@@ -211,7 +214,7 @@ function getSpaceAtIndex(inputIndex)
 end
 
 function getAdjacentSpace(backwards)
-  local space = spaces.activeSpace()
+  local space = hs.spaces.activeSpaceOnScreen()
   local availableSpaces = getAvailableSpaces()
 
   local startIndex
@@ -280,7 +283,7 @@ function getScreenFromUUID(screenUUID)
    local allScreens = hs.screen.allScreens()
    for i = 1, #allScreens do
       local screen = allScreens[i]
-      if screen:spacesUUID() == screenUUID then
+      if screen:getUUID() == screenUUID then
          return screen
       end
    end
@@ -289,43 +292,14 @@ end
 function bindSpaceNavKey(i)
    hs.hotkey.bind({ "cmd", "ctrl" }, spaceKeys[i], function()
       local targetSpace = getSpaceFromNavKey(spaceKeys[i])
-      local targetScreenUUID = spaces.spaceScreenUUID(targetSpace)
 
-      local focusTargetWindow
-
-      if targetScreenUUID ~= spaces.spaceScreenUUID(spaces.activeSpace()) then
-         local screen = getScreenFromUUID(targetScreenUUID)
-
-         if screen == nil then
-            print("ERROR: no matching screen found for", spaceKeys[i], targetSpace, targetScreenUUID)
-            return
-         end
-
-         local windows = hs.window.filter.default:getWindows()
-
-         for i = 1, #windows do
-            local window = windows[i]
-            if window:screen() == screen then
-               local spaces = window:spaces()
-               for j = 1, #spaces do
-                  if spaces[j] == targetSpace then
-                     focusTargetWindow = window
-                     break
-                  end
-               end
-            end
-         end
-
-         if focusTargetWindow ~= nil then
-            focusTargetWindow:focus()
-         end
-
-         if spaces.activeSpace() == targetSpace then
-            return
-         end
+      local focusTargetWindow = windowFromIDs(hs.spaces.windowsForSpace(targetSpace))
+      
+      if focusTargetWindow ~= nil then
+        focusTargetWindow:focus()
       end
 
-      navigateToSpace(getSpaceFromNavKey(spaceKeys[i]))
+      navigateToSpace(targetSpace)
 
       forceRefocusToFightChromeNavigation(focusTargetWindow)
    end)
@@ -333,6 +307,26 @@ function bindSpaceNavKey(i)
    hs.hotkey.bind({ "alt", "ctrl" }, spaceKeys[i], function()
       moveFocusedWindowToSpaceAndFocusNextWindow(getSpaceFromNavKey(spaceKeys[i]))
    end)
+end
+
+function windowFromIDs(windowIDs)
+  local windows = hs.window.filter.default:getWindows()
+
+  for i = 1, #windowIDs do
+    local window = windowFromID(windows, windowIDs[i])
+    if window ~= nil then
+      return window
+    end
+  end
+end
+
+function windowFromID(windows, windowID)
+  for i = 1, #windows do
+    local window = windows[i]
+    if window:id() == windowID then
+      return window
+    end
+  end
 end
 
 function forceRefocusToFightChromeNavigation(focusTargetWindow)
