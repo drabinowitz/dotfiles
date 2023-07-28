@@ -76,3 +76,7 @@ if [ -f '/Users/dmitrirabinowitz/google-cloud-sdk/path.zsh.inc' ]; then . '/User
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/dmitrirabinowitz/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/dmitrirabinowitz/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH="/usr/local/opt/curl/bin:$PATH"
+
+export GPG_TTY=$(tty)
+
+. ~/k8s_alias.sh
